@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gutto Sorvetes — Case study · Antonio Neto</title>
+<meta name="description" content="Estudo de caso: landing page institucional premium para a Gutto Sorvetes, fábrica regional de sorvetes e açaí." />
+<link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../../index.html">Antonio <span>Neto</span></a>
+    <nav class="site-nav" id="siteNav">
+      <a href="../../index.html#sobre">Sobre</a>
+      <a href="../../index.html#formacao">Formação</a>
+      <a href="../../index.html#projetos">Projetos</a>
+      <a href="../../index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case-hero">
+    <div class="wrap">
+      <a class="case-back" href="../../index.html#projetos">← Voltar ao portfólio</a>
+      <span class="case-kicker">Web design & desenvolvimento front-end</span>
+      <h1>Gutto Sorvetes — Landing Page Institucional Premium</h1>
+      <p class="lead">Website institucional de conversão para uma fábrica regional de sorvetes e açaí com mais de 30 anos de história, feito para gerar desejo imediato, pedidos via WhatsApp e captação de revendedores.</p>
+
+      <div class="case-meta">
+        <div class="meta-pill"><div class="k">Cliente</div><div class="v">Gutto Sorvetes</div></div>
+        <div class="meta-pill"><div class="k">Público</div><div class="v">Consumidores & revendedores</div></div>
+        <div class="meta-pill"><div class="k">Entrega</div><div class="v">Single-page · claro/escuro</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="wrap">
+
+      <h2>Desafio</h2>
+      <p>Uma marca regional com três décadas de história precisava de presença digital com cara de marca nacional de alto padrão, sem perder o acolhimento local. O site antigo não existia: todo o contato acontecia por WhatsApp, sem material que sustentasse a proposta para revendedores.</p>
+      <ul>
+        <li>Transmitir apelo sensorial de alimento (cremosidade, cor, frescor) em tela.</li>
+        <li>Falar com dois públicos distintos na mesma página, sem confundir a jornada.</li>
+        <li>Converter visitas em conversas de WhatsApp com o menor atrito possível.</li>
+      </ul>
+
+      <h2>Direção criativa</h2>
+      <p><strong>Conceito:</strong> minimalismo editorial + fotografia de alimentos + organização refinada.</p>
+      <p><strong>Paleta:</strong> vermelho Gutto (#E53935) como cor de marca, creme (#FFF8F0) como base, acentos manteiga/rosa/berry para diferenciar sabores. Tokens em OKLCH para consistência de contraste entre temas.</p>
+      <p><strong>Tipografia:</strong> Poppins (display, títulos com tracking negativo) + Inter (texto).</p>
+      <p><strong>Linguagem visual:</strong> cartões arredondados generosos, sombras suaves coloridas, glassmorphism no header, gradientes de marca em CTAs e títulos.</p>
+
+      <h2>Arquitetura da página</h2>
+      <div class="case-flow">
+        <div class="step">Header glass + nav ancorada</div>
+        <span class="arrow">→</span>
+        <div class="step">Hero com parallax</div>
+        <span class="arrow">→</span>
+        <div class="step">Produtos & sabores</div>
+        <span class="arrow">→</span>
+        <div class="step">Revendedores</div>
+        <span class="arrow">→</span>
+        <div class="step">Números & galeria</div>
+        <span class="arrow">→</span>
+        <div class="step">Depoimentos · FAQ · CTA final</div>
+      </div>
+
+      <h2>Destaques de experiência</h2>
+      <ul>
+        <li>Hero com parallax e elementos flutuantes que reagem ao scroll.</li>
+        <li>Grid assimétrico de produtos — hierarquia visual em vez de cards iguais.</li>
+        <li>Carrossel de sabores com scroll-snap, setas e suporte a teclado.</li>
+        <li>Contadores animados disparados ao entrar na viewport.</li>
+        <li>Lightbox de galeria com foco preso, fechamento por ESC e navegação por setas.</li>
+        <li>Tema claro/escuro persistido em <code>localStorage</code>, aplicado antes da primeira pintura (sem flash de tema errado).</li>
+        <li>CTA de WhatsApp onipresente, com botão flutuante em mobile.</li>
+        <li>404 personalizada com copy de marca ("Esse sabor derreteu…").</li>
+      </ul>
+
+      <h2>Acessibilidade e performance</h2>
+      <ul>
+        <li>HTML semântico, um único <code>&lt;h1&gt;</code>, landmarks e <code>alt</code> descritivo em todas as imagens.</li>
+        <li>Contraste AA nos pares de cor de marca; foco visível em todos os interativos.</li>
+        <li>Navegação completa por teclado (nav, carrossel, accordion, lightbox).</li>
+        <li><code>prefers-reduced-motion</code> desliga animações e scroll suave.</li>
+        <li>Imagens otimizadas com lazy loading; fontes com preconnect e display swap.</li>
+        <li>SEO completo: title/description únicos, Open Graph, Twitter Card, JSON-LD FoodEstablishment, robots.txt, sitemap.xml, manifest PWA.</li>
+      </ul>
+
+      <h2>Stack técnica</h2>
+      <table>
+        <tr><th>Camada</th><th>Tecnologia</th></tr>
+        <tr><td>Framework</td><td>React 19 + TanStack Start (SSR)</td></tr>
+        <tr><td>Roteamento</td><td>TanStack Router (file-based)</td></tr>
+        <tr><td>Build</td><td>Vite 7</td></tr>
+        <tr><td>Estilos</td><td>Tailwind CSS v4 com design tokens em <code>@theme</code></td></tr>
+        <tr><td>UI</td><td>shadcn/ui (New York) + Lucide icons</td></tr>
+        <tr><td>Animação</td><td>Framer Motion + keyframes CSS</td></tr>
+        <tr><td>Deploy</td><td>Edge (Cloudflare Workers)</td></tr>
+      </table>
+      <p>Todas as cores, gradientes e sombras vivem como variáveis semânticas em <code>src/styles.css</code>, consumidas via utilitários. Nenhuma cor fixa em componentes — o dark mode sai de graça.</p>
+
+      <h2>Resultados de projeto</h2>
+      <ul>
+        <li>Página única com 11 seções, pronta para tráfego pago e Instagram bio.</li>
+        <li>Dois caminhos de conversão claros: pedido (consumidor) e cadastro (revendedor).</li>
+        <li>Base escalável: adicionar catálogo, área de revendedor ou backend não exige redesenho — só novas rotas sobre o mesmo design system.</li>
+      </ul>
+
+      <div class="case-note">Telefone, endereço, Instagram e mapa estão como placeholders marcados no projeto original, prontos para substituição pelos dados reais do cliente.</div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Antonio Neto.</p>
+    <div class="footer-links">
+      <a href="../../index.html#contato">Contato</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
