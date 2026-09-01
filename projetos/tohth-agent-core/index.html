@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T.O.H.T.H Agent Core — Case study · Antonio Neto</title>
+<meta name="description" content="Estudo de caso: agente de IA pessoal estilo J.A.R.V.I.S, com núcleo local (Ollama) e console web em tempo real via WebSocket." />
+<link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../../index.html">Antonio <span>Neto</span></a>
+    <nav class="site-nav" id="siteNav">
+      <a href="../../index.html#sobre">Sobre</a>
+      <a href="../../index.html#formacao">Formação</a>
+      <a href="../../index.html#projetos">Projetos</a>
+      <a href="../../index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case-hero">
+    <div class="wrap">
+      <a class="case-back" href="../../index.html#projetos">← Voltar ao portfólio</a>
+      <span class="case-kicker">Projeto pessoal · IA aplicada</span>
+      <h1>T.O.H.T.H — Agente de IA pessoal</h1>
+      <p class="lead">Batizado em homenagem a Thoth, o deus egípcio da escrita e do conhecimento. Um assistente de IA pessoal estilo J.A.R.V.I.S que roda de forma gratuita e privada, sem depender de assinaturas de nuvem — núcleo local + console web em tempo real.</p>
+
+      <div class="case-meta">
+        <div class="meta-pill"><div class="k">LLM</div><div class="v">100% local (Ollama)</div></div>
+        <div class="meta-pill"><div class="k">Custo</div><div class="v">Zero — sem APIs pagas</div></div>
+        <div class="meta-pill"><div class="k">Interface</div><div class="v">Console web em tempo real</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="wrap">
+
+      <h2>Resumo do projeto</h2>
+      <p>O cérebro do agente é um modelo de linguagem local servido pelo Ollama; sobre ele foi construída uma camada de orquestração que dá ao modelo persona, memória persistente e acesso a ferramentas externas. Além do núcleo em Python, o projeto inclui um console web em React que se conecta ao backend por WebSocket e exibe, em tempo real, a transcrição do usuário, a resposta do agente token a token e cada chamada de ferramenta — tudo com identidade visual inspirada na iconografia egípcia.</p>
+
+      <h2>O que o sistema faz</h2>
+      <ul>
+        <li>Conversação com um LLM rodando 100% na máquina do usuário (privacidade total, custo zero).</li>
+        <li>Memória persistente: fatos marcados pelo usuário são gravados em disco e reinjetados no contexto das conversas seguintes.</li>
+        <li>Ferramentas: previsão do tempo (Open-Meteo), busca na web (DuckDuckGo) e envio de e-mail (SMTP).</li>
+        <li>Persona fixa — o agente responde sempre como "o escriba dos deuses", com tom consistente.</li>
+        <li>Console web em tempo real com streaming de respostas, status de conexão e histórico visual da sessão.</li>
+        <li>Caminho pronto para evoluir para voz (STT/TTS locais) e visão por câmera.</li>
+      </ul>
+
+      <h2>Arquitetura</h2>
+      <div class="case-flow">
+        <div class="step">Console Web (React)</div>
+        <span class="arrow">⇄ WebSocket ⇄</span>
+        <div class="step">Orquestrador (Python)</div>
+        <span class="arrow">→</span>
+        <div class="step">Ollama (LLM local)</div>
+      </div>
+      <p>O orquestrador é o centro do sistema: recebe a mensagem, decide se ela deve ser resolvida por uma ferramenta ou pelo modelo, monta o prompt com persona + memória + histórico, chama o Ollama e devolve o resultado. O front-end não conhece o LLM: ele apenas fala o protocolo de eventos.</p>
+
+      <h2>Protocolo de comunicação</h2>
+      <p>Toda a integração entre backend e interface acontece por mensagens JSON. O campo <code>done</code> permite streaming: enquanto for <code>false</code>, o texto é concatenado à bolha em construção.</p>
+      <table>
+        <tr><th>Direção</th><th>Exemplo</th></tr>
+        <tr><td>Backend → interface</td><td><code>{"type":"assistant","text":"Consultando os céus…","done":false}</code></td></tr>
+        <tr><td>Interface → backend</td><td><code>{"type":"user_message","text":"bom dia"}</code></td></tr>
+      </table>
+
+      <h2>Interface (console web)</h2>
+      <ul>
+        <li>Campo de URL do WebSocket com persistência em localStorage — reconecta no mesmo endpoint entre sessões.</li>
+        <li>Indicador de estado do canal: selado (desconectado), invocando (conectando) e canal aberto (conectado).</li>
+        <li>Bolhas distintas por origem: usuário, agente, ferramenta invocada e eventos de sistema.</li>
+        <li>Cursor pulsante durante o streaming, auto-scroll e foco automático no campo de entrada.</li>
+        <li>Identidade visual: paleta obsidiana, papiro, ouro, laranja e carmim; tipografia Cinzel + Rajdhani + JetBrains Mono; moldura ritual com efeito scanline e hieróglifos no estado vazio.</li>
+      </ul>
+
+      <h2>Desafios e soluções</h2>
+      <ul>
+        <li><strong>Streaming sem travar a interface:</strong> em vez de recriar a lista de mensagens a cada token, a resposta parcial é acumulada na última bolha marcada como parcial.</li>
+        <li><strong>Reconexão e falhas de rede:</strong> URLs inválidas e quedas de canal viram eventos de sistema visíveis, em vez de erros silenciosos no console.</li>
+        <li><strong>Custo zero:</strong> nenhuma API paga — modelo local e serviços abertos, o que também garante que nenhum dado da conversa saia da máquina.</li>
+        <li><strong>Desacoplamento:</strong> o protocolo JSON permite trocar o LLM ou adicionar voz e visão sem tocar no front-end.</li>
+      </ul>
+
+      <h2>Próximos passos</h2>
+      <ul>
+        <li>Voz de ponta a ponta: Whisper.cpp para transcrição e Piper para síntese, com detecção de fala (VAD).</li>
+        <li>Visão: envio periódico de quadros da webcam para um modelo multimodal local.</li>
+        <li>Memória semântica com embeddings e busca vetorial, substituindo o JSON plano.</li>
+        <li>Classificador leve de intenção para escolher a ferramenta antes de acionar o LLM principal.</li>
+      </ul>
+
+      <h2>O que este projeto demonstra</h2>
+      <ul>
+        <li>Integração de LLMs locais em uma aplicação real, com orquestração e uso de ferramentas.</li>
+        <li>Comunicação em tempo real full-stack via WebSocket, com streaming incremental.</li>
+        <li>Design de protocolo desacoplado entre backend e front-end.</li>
+        <li>React moderno com SSR, gerenciamento de estado e UI com identidade visual própria.</li>
+        <li>Preocupação com privacidade, custo e possibilidade de execução offline.</li>
+      </ul>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Antonio Neto.</p>
+    <div class="footer-links">
+      <a href="../../index.html#contato">Contato</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
