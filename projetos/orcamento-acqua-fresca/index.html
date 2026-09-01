@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Orçamento de Pedido — Acqua Fresca — Case study · Antonio Neto</title>
+<meta name="description" content="Estudo de caso: ferramenta de planejamento de compras e fluxo de parcelas para uma rede de lojas de perfumaria e cosméticos." />
+<link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../../index.html">Antonio <span>Neto</span></a>
+    <nav class="site-nav" id="siteNav">
+      <a href="../../index.html#sobre">Sobre</a>
+      <a href="../../index.html#formacao">Formação</a>
+      <a href="../../index.html#projetos">Projetos</a>
+      <a href="../../index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case-hero">
+    <div class="wrap">
+      <a class="case-back" href="../../index.html#projetos">← Voltar ao portfólio</a>
+      <span class="case-kicker">Estudo de caso · Produto interno</span>
+      <h1>Orçamento de Pedido — Grupo Acqua Fresca</h1>
+      <p class="lead">Ferramenta de planejamento de compras e fluxo de parcelas criada para uma rede de lojas de perfumaria e cosméticos (8 PDVs, 4 marcas). O objetivo é responder a uma pergunta prática: "quanto eu posso comprar este mês sem estourar o orçamento, considerando as parcelas dos pedidos que já lancei?"</p>
+
+      <div class="case-meta">
+        <div class="meta-pill"><div class="k">Lojas</div><div class="v">8 PDVs</div></div>
+        <div class="meta-pill"><div class="k">Marcas</div><div class="v">4 marcas</div></div>
+        <div class="meta-pill"><div class="k">Foco</div><div class="v">Planejamento & parcelas</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="wrap">
+
+      <h2>O problema</h2>
+      <p>Cada pedido de compra é rateado entre várias lojas e pago em parcelas mensais. Sem uma ferramenta central, era difícil enxergar rapidamente quanto do orçamento de cada loja já estava comprometido com parcelas em aberto, e como distribuir um novo pedido de forma justa entre as unidades.</p>
+
+      <h2>Como funciona</h2>
+      <ul>
+        <li>O valor total de um novo pedido é rateado entre as lojas usando o histórico de compras de cada PDV como peso — quem compra mais recebe uma fatia maior.</li>
+        <li>Um modo manual permite digitar o percentual de cada loja; o sistema avisa quando a soma não fecha 100% e oferece normalização automática.</li>
+        <li>Gráficos mostram o rateio em R$ e a participação percentual de cada loja.</li>
+        <li>Cada pedido lançado gera parcelas mensais, que entram automaticamente no orçamento planejado dos meses seguintes.</li>
+        <li>Um painel de acompanhamento mostra orçamento planejado, parcelas já comprometidas e saldo disponível por loja e por mês.</li>
+        <li>Importação de relatórios permite lançar um novo pedido a partir de um relatório de compras mais recente, sem digitação manual.</li>
+      </ul>
+
+      <h2>Stack e abordagem</h2>
+      <p>Aplicação web construída com vibecoding (Lovable), HTML/CSS/JS em arquivo único para facilitar o deploy interno, com toda a lógica de rateio, parcelamento e normalização de percentuais implementada no front-end e dados carregados a partir de relatórios semanais exportados do sistema de compras.</p>
+
+      <h2>O que este projeto demonstra</h2>
+      <ul>
+        <li>Modelagem de um problema financeiro real (rateio ponderado + fluxo de parcelas) em regras de negócio claras.</li>
+        <li>Visualização de dados aplicada à tomada de decisão de compras.</li>
+        <li>Entrega rápida de uma ferramenta interna sob medida, sem depender de planilhas soltas.</li>
+      </ul>
+
+      <div class="case-note">Este é um produto interno do Grupo Acqua Fresca. Por conter dados reais de compras e faturamento das lojas, a demonstração ao vivo com o dataset completo não é publicada aqui — apenas este resumo do problema, da solução e da stack.</div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Antonio Neto.</p>
+    <div class="footer-links">
+      <a href="../../index.html#contato">Contato</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
