@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestão de Resultados N3 — Case study · Antonio Neto</title>
+<meta name="description" content="Estudo de caso: plataforma multicanal de metas, performance e apresentações para acompanhamento comercial em tempo real." />
+<link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../../index.html">Antonio <span>Neto</span></a>
+    <nav class="site-nav" id="siteNav">
+      <a href="../../index.html#sobre">Sobre</a>
+      <a href="../../index.html#formacao">Formação</a>
+      <a href="../../index.html#projetos">Projetos</a>
+      <a href="../../index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case-hero">
+    <div class="wrap">
+      <a class="case-back" href="../../index.html#projetos">← Voltar ao portfólio</a>
+      <span class="case-kicker">Estudo de caso · Produto interno</span>
+      <h1>Gestão de Resultados N3</h1>
+      <p class="lead">Sistema web que unifica duas planilhas operacionais de acompanhamento comercial (canal Loja e canal Venda Direta) em uma única plataforma em tempo real, com importação de planilhas, edição manual auditada, portal do colaborador e modo apresentação para as reuniões semanais.</p>
+
+      <div class="case-meta">
+        <div class="meta-pill"><div class="k">Canais</div><div class="v">2 — Loja · Venda Direta</div></div>
+        <div class="meta-pill"><div class="k">Níveis</div><div class="v">3 — PDV · Supervisora · Consultora</div></div>
+        <div class="meta-pill"><div class="k">Dados</div><div class="v">Tempo real</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="wrap">
+
+      <h2>Stack</h2>
+      <p>React 19 · TypeScript · TanStack Start (SSR) · Vite · Tailwind CSS · shadcn/ui · PostgreSQL com RLS · Autenticação e Storage · API HTTP protegida por chave.</p>
+
+      <h2>Meu papel</h2>
+      <p>Concepção do modelo de dados, regras de negócio, arquitetura de importação e toda a interface — do rascunho em planilha ao produto usado semanalmente pela operação.</p>
+
+      <h2>O problema</h2>
+      <p>A operação acompanhava metas comerciais em duas planilhas Excel independentes: uma do canal Loja (PDVs e consultoras) e outra do canal Venda Direta (ciclos, supervisoras e indicadores do portal do fornecedor). Toda reunião semanal exigia consolidação manual, e cada correção de número precisava ser refeita em vários arquivos.</p>
+      <ul>
+        <li>Consolidação manual demorada e sujeita a erro humano antes de cada reunião.</li>
+        <li>Cálculos de Alcance e Gap divergentes entre arquivos e entre pessoas.</li>
+        <li>Sem histórico: não era possível saber quem alterou um número e quando.</li>
+        <li>Consultoras e supervisoras não tinham visibilidade do próprio desempenho.</li>
+        <li>Reimportações somavam valores em vez de substituí-los, inflando resultados.</li>
+      </ul>
+
+      <h2>Objetivos do produto</h2>
+      <ul>
+        <li>Uma única fonte de verdade para os dois canais, atualizada em tempo real.</li>
+        <li>Importar as planilhas existentes sem mudar a rotina de quem as preenche.</li>
+        <li>Padronizar as fórmulas de negócio no sistema, nunca na planilha.</li>
+        <li>Permitir correção manual de qualquer número, sempre com registro de auditoria.</li>
+        <li>Servir de tela de apresentação nas reuniões semanais, sem exportar slides.</li>
+      </ul>
+
+      <h2>Arquitetura e fluxo de dados</h2>
+      <div class="case-flow">
+        <div class="step">Planilhas XLSX / CSV</div>
+        <span class="arrow">→</span>
+        <div class="step">Parser resiliente</div>
+        <span class="arrow">→</span>
+        <div class="step">Banco Postgres + RLS</div>
+        <span class="arrow">→</span>
+        <div class="step">Painéis em tempo real</div>
+      </div>
+
+      <h2>Fórmulas padronizadas no sistema</h2>
+      <table>
+        <tr><th>Indicador</th><th>Fórmula</th></tr>
+        <tr><td>Alcance</td><td>Realizado ÷ Meta da própria pessoa</td></tr>
+        <tr><td>Gap %</td><td>Alcance − % do período corrido</td></tr>
+        <tr><td>Gap nominal</td><td>Meta − Realizado (nunca negativo)</td></tr>
+        <tr><td>Gap diário</td><td>Gap nominal ÷ dias úteis restantes</td></tr>
+        <tr><td>Itens por boleto</td><td>Itens ÷ nº de boletos do período</td></tr>
+        <tr><td>Penetração multimarcas</td><td>Base multimarca ÷ ativos no ciclo</td></tr>
+      </table>
+      <p>Os dias úteis restantes consideram o calendário real de cada ciclo: domingos são excluídos e a regra de cauda (+2 dias) estende o período de apuração. Um ciclo que cruza a virada do mês é rateado proporcionalmente entre os dois meses no cálculo de GMV mensal.</p>
+
+      <h2>Funcionalidades</h2>
+      <ul>
+        <li><strong>Importação inteligente</strong> — detecta automaticamente se a planilha é de Loja ou Venda Direta, mostra pré-visualização editável e grava por upsert parcial (reimportar corrige valores em vez de somar).</li>
+        <li><strong>Importação do portal do fornecedor</strong> — leitor de CSV multi-seção que traz apenas o Realizado de indicadores específicos, preservando as metas já cadastradas.</li>
+        <li><strong>Hierarquia em 3 níveis</strong> — navegação por PDV, Supervisora e Consultora, com comparação por indicador e consolidados que evitam dupla contagem.</li>
+        <li><strong>Plano de Voo</strong> — meta diária, gap nominal e gap diário por dia útil, com semáforo de cor por faixa de alcance.</li>
+        <li><strong>Edição manual auditada</strong> — qualquer meta ou realizado pode ser corrigido, sempre gravando autor, valor anterior e valor novo.</li>
+        <li><strong>Portal do colaborador</strong> — consultoras e supervisoras entram com o próprio login e veem apenas o próprio desempenho.</li>
+        <li><strong>Modo apresentação</strong> — slides gerados a partir dos dados vivos para a reunião semanal.</li>
+        <li><strong>Painéis personalizados</strong> — montagem por arrastar e soltar, salvos por usuário.</li>
+        <li><strong>API protegida</strong> — endpoint HTTP autenticado por chave secreta que expõe o GMV mensal do canal Loja para outro sistema consumir.</li>
+      </ul>
+
+      <h2>Amostra de interface</h2>
+      <p>Semáforo de performance: <strong>Meta batida</strong> (≥ 100%) · <strong>Atenção</strong> (69% a 99%) · <strong>Crítico</strong> (&lt; 69%)</p>
+      <table>
+        <tr><th>Consultora</th><th>Meta</th><th>Realizado</th><th>Alcance</th><th>Gap %</th></tr>
+        <tr><td>Consultora A</td><td>R$ 120.000</td><td>R$ 128.400</td><td>107,0%</td><td>+33,8%</td></tr>
+        <tr><td>Consultora B</td><td>R$ 95.000</td><td>R$ 81.700</td><td>86,0%</td><td>+12,8%</td></tr>
+        <tr><td>Consultora C</td><td>R$ 80.000</td><td>R$ 49.600</td><td>62,0%</td><td>-11,2%</td></tr>
+        <tr><td>Consultora D</td><td>R$ 140.000</td><td>R$ 142.900</td><td>102,1%</td><td>+28,9%</td></tr>
+      </table>
+      <p style="font-size:12.5px;color:var(--text-faint)">Dados ilustrativos, apenas para demonstrar a interface.</p>
+
+      <h2>Resultados de negócio</h2>
+      <ul>
+        <li>Fechamento semanal deixou de exigir consolidação manual de planilhas.</li>
+        <li>Uma única fórmula de Alcance e Gap para toda a operação, sem divergência entre áreas.</li>
+        <li>Histórico completo de alterações, com autor e valores anterior e novo.</li>
+        <li>Autonomia da equipe de campo pelo portal, sem acesso a dados de terceiros.</li>
+        <li>Integração com outro sistema pela API mensal de GMV, sem exportar arquivos.</li>
+      </ul>
+
+      <div class="case-note">Produto interno do Grupo Acqua Fresca — dados e telas reais não são exibidos publicamente por confidencialidade.</div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Antonio Neto.</p>
+    <div class="footer-links">
+      <a href="../../index.html#contato">Contato</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
