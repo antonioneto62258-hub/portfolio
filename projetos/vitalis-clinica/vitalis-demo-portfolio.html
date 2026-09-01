@@ -1,0 +1,2112 @@
+<title>Vitalis Clínica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#FAF9F5;
+    --surface:#FFFFFF;
+    --surface-2:#F1F0EA;
+    --border:#E6E3D8;
+    --border-strong:#D8D4C4;
+    --text:#242821;
+    --text-muted:#6E7264;
+    --text-faint:#9A9C8E;
+    --primary:#3F6E5B;
+    --primary-strong:#2E5646;
+    --primary-soft:#E5EEE7;
+    --info:#2F6FA8;
+    --info-soft:#E4EEF6;
+    --success:#3F8F5F;
+    --success-soft:#E4F1E8;
+    --warning:#B4791E;
+    --warning-soft:#F6EAD8;
+    --danger:#AB4430;
+    --danger-soft:#F5E4DE;
+    --shadow-lg: 0 18px 40px -12px rgba(36,40,33,0.22);
+    --radius-md:10px;
+    --radius-lg:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#171A16;
+      --surface:#1E2219;
+      --surface-2:#262B20;
+      --border:#343A2C;
+      --border-strong:#404633;
+      --text:#EDEEE6;
+      --text-muted:#A9AC9C;
+      --text-faint:#7C7F6F;
+      --primary:#5FAE8F;
+      --primary-strong:#7FC3A6;
+      --primary-soft:#25352C;
+      --info:#6FA8D8;
+      --info-soft:#212C36;
+      --success:#6FBE8C;
+      --success-soft:#1F2F24;
+      --warning:#D9A455;
+      --warning-soft:#332A1B;
+      --danger:#D98A73;
+      --danger-soft:#332420;
+      --shadow-lg: 0 18px 40px -12px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#171A16;
+    --surface:#1E2219;
+    --surface-2:#262B20;
+    --border:#343A2C;
+    --border-strong:#404633;
+    --text:#EDEEE6;
+    --text-muted:#A9AC9C;
+    --text-faint:#7C7F6F;
+    --primary:#5FAE8F;
+    --primary-strong:#7FC3A6;
+    --primary-soft:#25352C;
+    --info:#6FA8D8;
+    --info-soft:#212C36;
+    --success:#6FBE8C;
+    --success-soft:#1F2F24;
+    --warning:#D9A455;
+    --warning-soft:#332A1B;
+    --danger:#D98A73;
+    --danger-soft:#332420;
+    --shadow-lg: 0 18px 40px -12px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ground);
+    color:var(--text);
+    font-family:'Public Sans', system-ui, -apple-system, sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; text-wrap:balance; margin:0; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  ::selection{background:var(--primary-soft);}
+  :focus-visible{outline:2px solid var(--primary); outline-offset:2px; border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+
+  /* ---------- shell ---------- */
+  .app-shell{display:grid; grid-template-columns:236px 1fr; min-height:100vh;}
+  .sidebar{
+    background:var(--surface); border-right:1px solid var(--border);
+    padding:22px 14px; display:flex; flex-direction:column; gap:2px;
+    position:sticky; top:0; height:100vh;
+  }
+  .brand{display:flex; align-items:center; gap:10px; padding:6px 10px 22px;}
+  .brand-mark{
+    width:34px; height:34px; border-radius:10px; background:var(--primary);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:600; font-size:16px; flex:none;
+  }
+  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:17px;}
+  .brand-sub{font-size:11px; color:var(--text-faint); margin-top:1px;}
+
+  .nav-group{display:flex; flex-direction:column; gap:2px; margin-top:4px;}
+  .nav-label{font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); padding:14px 12px 6px;}
+  .nav-item{
+    display:flex; align-items:center; gap:11px; padding:9px 12px; border-radius:9px;
+    color:var(--text-muted); font-size:13.5px; font-weight:500; cursor:pointer; border:none;
+    background:transparent; width:100%; text-align:left;
+  }
+  .nav-item svg{width:17px; height:17px; flex:none;}
+  .nav-item:hover{background:var(--surface-2); color:var(--text);}
+  .nav-item.active{background:var(--primary-soft); color:var(--primary-strong);}
+  .nav-badge{margin-left:auto; background:var(--danger); color:#fff; font-size:10.5px; font-weight:700; border-radius:20px; padding:1px 6px; font-family:'IBM Plex Mono',monospace;}
+
+  .sidebar-footer{margin-top:auto; padding-top:14px; border-top:1px solid var(--border);}
+  .role-switch{display:flex; flex-direction:column; gap:6px; padding:4px;}
+  .role-opt{
+    display:flex; align-items:center; gap:9px; padding:8px 9px; border-radius:9px; cursor:pointer;
+    border:1px solid transparent; background:transparent;
+  }
+  .role-opt.active{border-color:var(--border-strong); background:var(--surface-2);}
+  .role-avatar{width:26px; height:26px; border-radius:50%; background:var(--info-soft); color:var(--info);
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex:none;}
+  .role-opt.active .role-avatar{background:var(--primary); color:#fff;}
+  .role-name{font-size:12.5px; font-weight:600; color:var(--text);}
+  .role-tag{font-size:10.5px; color:var(--text-faint);}
+
+  .main{display:flex; flex-direction:column; min-height:100vh;}
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between; gap:18px;
+    padding:18px 30px; border-bottom:1px solid var(--border); background:var(--ground);
+    position:sticky; top:0; z-index:5;
+  }
+  .topbar-title{display:flex; flex-direction:column; gap:2px;}
+  .topbar-title h1{font-size:19px;}
+  .topbar-date{font-size:12.5px; color:var(--text-muted);}
+  .topbar-actions{display:flex; align-items:center; gap:10px;}
+  .search-box{
+    display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border);
+    border-radius:9px; padding:8px 12px; min-width:230px;
+  }
+  .search-box input{border:none; outline:none; background:transparent; color:var(--text); font-size:13px; width:100%;}
+  .search-box svg{width:15px; height:15px; color:var(--text-faint); flex:none;}
+
+  .theme-toggle{
+    display:flex; align-items:center; justify-content:center; width:38px; height:38px; flex:none;
+    border-radius:9px; border:1px solid var(--border-strong); background:var(--surface); color:var(--text-muted); cursor:pointer;
+  }
+  .theme-toggle:hover{background:var(--surface-2); color:var(--text);}
+  .theme-toggle svg{width:17px; height:17px;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:7px; border-radius:9px; padding:9px 14px;
+    font-size:13px; font-weight:600; cursor:pointer; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--text); white-space:nowrap;
+  }
+  .btn svg{width:15px; height:15px;}
+  .btn:hover{background:var(--surface-2);}
+  .btn-primary{background:var(--primary); border-color:var(--primary); color:#fff;}
+  .btn-primary:hover{background:var(--primary-strong); border-color:var(--primary-strong);}
+  .btn-ghost{border-color:transparent; background:transparent;}
+  .btn-ghost:hover{background:var(--surface-2);}
+  .btn-sm{padding:6px 10px; font-size:12.5px;}
+  .btn-danger-outline{color:var(--danger); border-color:var(--danger-soft); background:var(--danger-soft);}
+
+  .content{padding:26px 30px 70px; flex:1;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; gap:12px;}
+  .section-head h2{font-size:16px;}
+  .section-sub{font-size:12.5px; color:var(--text-faint);}
+
+  /* ---------- stat tiles ---------- */
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px;}
+  .stat-tile{padding:16px 18px; display:flex; flex-direction:column; gap:6px;}
+  .stat-top{display:flex; align-items:center; justify-content:space-between;}
+  .stat-icon{width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center;}
+  .stat-icon svg{width:15px; height:15px;}
+  .stat-value{font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; font-variant-numeric:tabular-nums;}
+  .stat-label{font-size:12.5px; color:var(--text-muted);}
+
+  /* ---------- appointment timeline ---------- */
+  .timeline{display:flex; flex-direction:column; gap:22px;}
+  .appt-row{
+    display:flex; align-items:center; gap:16px; padding:14px 16px; border-radius:var(--radius-lg);
+    background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--border-strong);
+  }
+  .appt-row.st-aguardando{border-left-color:var(--warning);}
+  .appt-row.st-atendimento{border-left-color:var(--info);}
+  .appt-row.st-concluido{border-left-color:var(--success);}
+  .appt-row.st-cancelado{border-left-color:var(--danger); opacity:0.6;}
+  .appt-row.is-next{box-shadow:0 0 0 2px var(--primary-soft) inset;}
+  .timeline-group{display:flex; flex-direction:column; gap:10px;}
+  .timeline-group-label{display:flex; align-items:center; gap:8px; padding:0 4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-faint);}
+  .timeline-group-label .count{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--text-muted); background:var(--surface-2); padding:1px 8px; border-radius:20px; font-size:10.5px; letter-spacing:0;}
+  .timeline-group-label.tg-atendimento .dot{background:var(--info);}
+  .timeline-group-label.tg-aguardando .dot{background:var(--warning);}
+  .timeline-group-label.tg-concluido .dot{background:var(--success);}
+  .timeline-group-label.tg-cancelado .dot{background:var(--danger);}
+  .timeline-group-label .dot{width:7px; height:7px; border-radius:50%; flex:none;}
+  .appt-time{width:56px; flex:none; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14px;}
+  .appt-time span{display:block; font-size:10.5px; color:var(--text-faint); font-weight:500; margin-top:1px;}
+  .avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--primary-soft); color:var(--primary-strong);
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex:none;
+  }
+  .appt-info{flex:1; min-width:0;}
+  .appt-name{font-weight:600; font-size:14px;}
+  .appt-meta{font-size:12.5px; color:var(--text-muted); margin-top:1px;}
+  .pill{
+    display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:3px 9px;
+    border-radius:20px; letter-spacing:0.01em; flex:none;
+  }
+  .pill::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .pill-aguardando{background:var(--warning-soft); color:var(--warning);}
+  .pill-atendimento{background:var(--info-soft); color:var(--info);}
+  .pill-concluido{background:var(--success-soft); color:var(--success);}
+  .pill-cancelado{background:var(--danger-soft); color:var(--danger);}
+  .pill-demo{background:var(--warning-soft); color:var(--warning);}
+  button.pill{border:none; font-family:inherit; cursor:pointer;}
+  button.pill:hover{filter:brightness(0.94);}
+  .pill-caret{width:10px; height:10px; margin-left:1px;}
+  .status-dot{position:absolute; top:4px; right:4px; width:9px; height:9px; border-radius:50%; padding:0; border:1.5px solid var(--surface); background-color:currentColor; cursor:pointer;}
+  .status-menu{position:fixed; z-index:70; background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow-lg); padding:6px; display:none; min-width:188px;}
+  .status-menu.show{display:block;}
+  .status-menu-item{display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:7px; cursor:pointer; font-size:13px; font-weight:500; color:var(--text); border:none; background:transparent; width:100%; text-align:left; font-family:inherit;}
+  .status-menu-item:hover{background:var(--surface-2);}
+  .status-menu-item .dot{width:8px; height:8px; border-radius:50%; flex:none;}
+  .status-menu-item.active{font-weight:700;}
+  .status-menu-item .check{margin-left:auto; width:14px; height:14px; color:var(--primary); flex:none;}
+  .row-actions{display:flex; gap:6px; flex:none;}
+  .icon-btn{
+    width:32px; height:32px; border-radius:8px; border:1px solid var(--border); background:var(--surface);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted);
+  }
+  .icon-btn svg{width:15px; height:15px;}
+  .icon-btn:hover{background:var(--surface-2); color:var(--text);}
+
+  .empty{padding:40px 20px; text-align:center; color:var(--text-faint); font-size:13px;}
+
+  /* ---------- agenda / week grid ---------- */
+  .agenda-toolbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:12px;}
+  .seg{display:flex; border:1px solid var(--border-strong); border-radius:9px; overflow:hidden;}
+  .seg button{border:none; background:var(--surface); color:var(--text-muted); padding:7px 14px; font-size:12.5px; font-weight:600; cursor:pointer;}
+  .seg button.active{background:var(--primary-soft); color:var(--primary-strong);}
+  .date-nav{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600;}
+
+  .week-scroll{overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--surface);}
+  .week-grid{display:grid; grid-template-columns:56px repeat(5,minmax(150px,1fr)); min-width:840px;}
+  .week-head{display:contents;}
+  .week-head-cell{
+    padding:12px 10px; text-align:center; border-bottom:1px solid var(--border); border-left:1px solid var(--border);
+    position:sticky; top:0; background:var(--surface); z-index:2;
+  }
+  .week-head-cell:first-child{border-left:none;}
+  .week-head-cell .d{font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em;}
+  .week-head-cell .n{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; margin-top:2px;}
+  .week-head-cell.today .n{color:var(--primary-strong);}
+  .time-col{position:relative; border-left:none;}
+  .time-label{position:absolute; right:8px; transform:translateY(-6px); font-size:10.5px; color:var(--text-faint); font-family:'IBM Plex Mono',monospace;}
+  .day-col{position:relative; border-left:1px solid var(--border); background-image:repeating-linear-gradient(to bottom, transparent 0, transparent 59px, var(--border) 59px, var(--border) 60px);}
+  .appt-block{
+    position:absolute; left:4px; right:4px; border-radius:8px; padding:5px 8px; overflow:hidden;
+    border:1px solid var(--border-strong); cursor:pointer; font-size:11.5px;
+  }
+  .appt-block b{display:block; font-size:12px; font-weight:700; margin-bottom:1px;}
+  .appt-block.st-aguardando{background:var(--warning-soft); color:var(--warning); border-color:var(--warning);}
+  .appt-block.st-atendimento{background:var(--info-soft); color:var(--info); border-color:var(--info);}
+  .appt-block.st-concluido{background:var(--success-soft); color:var(--success); border-color:var(--success);}
+  .appt-block.st-cancelado{background:var(--danger-soft); color:var(--danger); border-color:var(--danger); text-decoration:line-through; opacity:0.7;}
+  .appt-block b, .appt-block span{color:var(--text);}
+
+  /* ---------- patients table ---------- */
+  .filter-row{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;}
+  table.plist{width:100%; border-collapse:collapse; font-size:13px;}
+  table.plist th{text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-faint); padding:0 14px 10px; font-weight:600;}
+  table.plist td{padding:12px 14px; border-top:1px solid var(--border);}
+  table.plist tr.prow{cursor:pointer;}
+  table.plist tr.prow:hover td{background:var(--surface-2);}
+  .p-name-cell{display:flex; align-items:center; gap:10px;}
+  .tag{font-size:11px; font-weight:600; padding:3px 8px; border-radius:6px; background:var(--surface-2); color:var(--text-muted);}
+
+  /* ---------- whatsapp ---------- */
+  .wa-shell{display:grid; grid-template-columns:300px 1fr; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; background:var(--surface); height:calc(100vh - 240px); min-height:460px;}
+  .wa-list{border-right:1px solid var(--border); overflow-y:auto;}
+  .wa-conv{display:flex; gap:10px; padding:12px 14px; cursor:pointer; border-bottom:1px solid var(--border);}
+  .wa-conv:hover, .wa-conv.active{background:var(--surface-2);}
+  .wa-conv-body{flex:1; min-width:0;}
+  .wa-conv-top{display:flex; justify-content:space-between; gap:6px;}
+  .wa-conv-name{font-weight:600; font-size:13px;}
+  .wa-conv-time{font-size:10.5px; color:var(--text-faint); font-family:'IBM Plex Mono',monospace;}
+  .wa-conv-preview{font-size:12px; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;}
+  .wa-unread{background:var(--primary); color:#fff; font-size:10.5px; font-weight:700; border-radius:20px; padding:1px 6px; margin-left:6px;}
+  .wa-main{display:flex; flex-direction:column;}
+  .wa-thread-head{display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid var(--border);}
+  .wa-thread-body{flex:1; overflow-y:auto; padding:18px 20px; display:flex; flex-direction:column; gap:10px; background:var(--ground);}
+  .bubble{max-width:64%; padding:9px 13px; border-radius:12px; font-size:13px; line-height:1.45;}
+  .bubble-in{background:var(--surface); border:1px solid var(--border); align-self:flex-start; border-bottom-left-radius:3px;}
+  .bubble-out{background:var(--primary-soft); color:var(--text); align-self:flex-end; border-bottom-right-radius:3px;}
+  .bubble time{display:block; font-size:10px; color:var(--text-faint); margin-top:4px; font-family:'IBM Plex Mono',monospace;}
+  .wa-input-row{display:flex; gap:10px; padding:12px 16px; border-top:1px solid var(--border);}
+  .wa-input-row input{flex:1; border:1px solid var(--border-strong); border-radius:9px; padding:10px 14px; font-size:13px; background:var(--surface); color:var(--text); outline:none;}
+  .wa-input-row input:focus{border-color:var(--primary);}
+  .wa-empty{display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-faint); font-size:13px;}
+
+  .demo-banner{
+    display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border-radius:var(--radius-lg);
+    background:var(--warning-soft); border:1px solid var(--warning); color:var(--text); margin-bottom:18px; font-size:13px;
+  }
+  .demo-banner svg{width:18px; height:18px; color:var(--warning); flex:none; margin-top:1px;}
+
+  /* ---------- financeiro ---------- */
+  .fin-legend{display:flex; gap:16px; flex:none;}
+  .fin-legend-item{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--text-muted); font-weight:500;}
+  .fin-legend-dot{width:9px; height:9px; border-radius:3px; flex:none;}
+  .fin-chart-svg{width:100%; height:auto; display:block; overflow:visible;}
+  .fin-bar-hit{cursor:pointer;}
+  .fin-bar-hit:focus{outline:none;}
+  .fin-tooltip{position:fixed; z-index:70; background:var(--text); color:var(--ground); font-size:12px; font-weight:600; padding:7px 10px; border-radius:8px; pointer-events:none; display:none; box-shadow:var(--shadow-lg); white-space:nowrap;}
+  .fin-tooltip.show{display:block;}
+  .fin-tooltip .tt-series{font-weight:500; opacity:0.75; margin-right:5px;}
+  .type-pill{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px;}
+  .type-pill::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .type-pill-entrada{background:var(--success-soft); color:var(--success);}
+  .type-pill-saida{background:var(--danger-soft); color:var(--danger);}
+  .amount-entrada{color:var(--success); font-weight:700;}
+  .amount-saida{color:var(--danger); font-weight:700;}
+
+  .fin-subview{display:none;}
+  .fin-subview.active{display:block;}
+
+  .nfe-preview{position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden;}
+  .nfe-watermark{
+    position:absolute; top:52%; left:50%; transform:translate(-50%,-50%) rotate(-18deg); font-size:34px; font-weight:800;
+    color:var(--warning); opacity:0.16; letter-spacing:0.04em; white-space:nowrap; pointer-events:none; font-family:'Fraunces', serif;
+  }
+  .nfe-head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:16px 18px; border-bottom:1px solid var(--border); position:relative; z-index:1;}
+  .nfe-head h3{font-size:15px; margin:0;}
+  .nfe-head .nfe-sub{font-size:11.5px; color:var(--text-faint); margin-top:2px;}
+  .nfe-tag{background:var(--warning-soft); color:var(--warning); font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; flex:none;}
+  .nfe-body{padding:16px 18px; position:relative; z-index:1; font-size:12.5px;}
+  .nfe-row{display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid var(--border);}
+  .nfe-row:last-child{border-bottom:none;}
+  .nfe-row .k{color:var(--text-faint);}
+  .nfe-row .v{color:var(--text); font-weight:600; text-align:right;}
+  .nfe-block-title{font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-faint); margin:14px 0 4px;}
+  .nfe-total{display:flex; justify-content:space-between; align-items:baseline; padding:14px 18px; background:var(--surface-2); border-top:1px solid var(--border); position:relative; z-index:1;}
+  .nfe-total .k{font-size:12.5px; color:var(--text-muted); font-weight:600;}
+  .nfe-total .v{font-family:'IBM Plex Mono',monospace; font-size:22px; font-weight:700; color:var(--primary-strong);}
+  .nfe-foot{padding:10px 18px 14px; font-size:11px; color:var(--text-faint); position:relative; z-index:1;}
+  .draft-pill{background:var(--warning-soft); color:var(--warning); font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px;}
+  .demo-banner b{display:block; margin-bottom:2px;}
+  .demo-banner .btn{margin-top:8px;}
+
+  /* ---------- config ---------- */
+  .config-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:20px; align-items:start;}
+  .field{display:flex; flex-direction:column; gap:5px; margin-bottom:14px;}
+  .field label{font-size:12px; font-weight:600; color:var(--text-muted);}
+  .field input, .field select, .field textarea{
+    border:1px solid var(--border-strong); border-radius:9px; padding:9px 12px; font-size:13px; background:var(--surface);
+    color:var(--text); font-family:inherit; outline:none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--primary);}
+  .cv-input{
+    width:92px; border:1px solid var(--border-strong); border-radius:8px; padding:6px 9px; font-size:12.5px;
+    background:var(--surface); color:var(--text); font-family:'IBM Plex Mono',monospace; outline:none; text-align:right;
+  }
+  .cv-input:focus{border-color:var(--primary);}
+  .provider-row{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--border);}
+  .provider-row:first-of-type{border-top:none;}
+  .provider-name{font-weight:600; font-size:13px;}
+  .provider-desc{font-size:12px; color:var(--text-muted); margin-top:2px;}
+  .user-row{display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--border);}
+  .user-row:first-of-type{border-top:none;}
+
+  /* ---------- drawers & modals ---------- */
+  .scrim{position:fixed; inset:0; background:rgba(20,22,17,0.36); z-index:40; display:none;}
+  .scrim.show{display:block;}
+  .drawer{
+    position:fixed; top:0; right:-420px; width:400px; height:100%; background:var(--surface);
+    border-left:1px solid var(--border); box-shadow:var(--shadow-lg); z-index:41; display:flex; flex-direction:column;
+    transition:right 0.22s ease;
+  }
+  .drawer.show{right:0;}
+  .drawer-head{display:flex; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid var(--border);}
+  .drawer-head .avatar{width:40px;height:40px;}
+  .drawer-body{flex:1; overflow-y:auto; padding:16px 18px;}
+  .drawer-close{margin-left:auto;}
+
+  .modal{position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:20px;}
+  .modal.show{display:flex;}
+  .modal-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); width:100%; max-width:460px; max-height:88vh; overflow-y:auto;}
+  .modal-head{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--border);}
+  .modal-head h3{font-size:16px;}
+  .modal-body{padding:18px 20px;}
+  .modal-foot{display:flex; justify-content:flex-end; gap:10px; padding:14px 20px; border-top:1px solid var(--border);}
+
+  .history-item{display:flex; gap:10px; padding:10px 0; border-top:1px solid var(--border);}
+  .history-item:first-child{border-top:none;}
+  .history-dot{width:8px; height:8px; border-radius:50%; background:var(--primary); margin-top:5px; flex:none;}
+
+  .rx-item{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 11px; border:1px solid var(--border); border-radius:9px; margin-bottom:7px; font-size:13px; background:var(--surface-2);}
+  .rx-item-remove{background:none; border:none; color:var(--text-faint); cursor:pointer; font-size:16px; line-height:1; padding:2px 4px; flex:none;}
+  .rx-item-remove:hover{color:var(--danger);}
+  .rx-add-row{display:flex; gap:8px; margin-bottom:14px;}
+  .rx-add-row input{flex:1;}
+  .rx-empty{font-size:12.5px; color:var(--text-faint); padding:8px 2px 14px;}
+
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(10px); background:var(--text); color:var(--ground);
+    padding:10px 18px; border-radius:9px; font-size:13px; font-weight:600; z-index:60; opacity:0; transition:all 0.2s ease; pointer-events:none;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:960px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .config-grid{grid-template-columns:1fr;}
+    .search-box{display:none;}
+  }
+  @media (max-width:760px){
+    .app-shell{grid-template-columns:72px 1fr;}
+    .brand-name, .brand-sub, .nav-item span:not(.nav-badge), .nav-label, .role-name, .role-tag{display:none;}
+    .nav-item{justify-content:center;}
+    .role-opt{justify-content:center;}
+    .drawer{width:100%;}
+  }
+</style>
+
+<script>
+  (function(){
+    try {
+      var saved = localStorage.getItem("vitalis-theme");
+      if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
+    } catch(e){}
+  })();
+</script>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">V</div>
+      <div>
+        <div class="brand-name">Vitalis</div>
+        <div class="brand-sub">Clínica Vitalis</div>
+      </div>
+    </div>
+
+    <nav class="nav-group">
+      <button class="nav-item active" data-view="dia">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        <span>Visão do dia</span>
+      </button>
+      <button class="nav-item" data-view="agenda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>
+        <span>Agenda</span>
+      </button>
+      <button class="nav-item" data-view="pacientes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.2 19c0-3.4 2.6-5.6 5.8-5.6s5.8 2.2 5.8 5.6"/><circle cx="17" cy="8" r="2.4"/><path d="M15.5 13.6c2.6.2 4.6 2.2 4.6 5.4"/></svg>
+        <span>Pacientes</span>
+      </button>
+      <button class="nav-item" data-view="whatsapp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.1-3.7A8 8 0 1112 20a8.3 8.3 0 01-4-1.1L4 20z"/><path d="M8.8 10.3c.2 2.6 2.3 4.7 4.9 4.9"/></svg>
+        <span>WhatsApp</span>
+        <span class="nav-badge" id="waNavBadge">3</span>
+      </button>
+      <button class="nav-item nav-medica-only" data-view="financeiro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20V13.5M10 20V6.5M16.5 20V15M3.5 20h13"/></svg>
+        <span>Financeiro</span>
+      </button>
+      <div class="nav-label">Clínica</div>
+      <button class="nav-item" data-view="config">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.3M12 18.2v2.3M4.9 6.4l1.8 1.4M17.3 16.2l1.8 1.4M3.5 12h2.3M18.2 12h2.3M4.9 17.6l1.8-1.4M17.3 7.8l1.8-1.4"/></svg>
+        <span>Configurações</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="role-switch">
+        <button class="role-opt active" data-role="medica">
+          <div class="role-avatar">MD</div>
+          <div>
+            <div class="role-name">Dra. Marina</div>
+            <div class="role-tag">Clínica geral</div>
+          </div>
+        </button>
+        <button class="role-opt" data-role="recepcao">
+          <div class="role-avatar">AT</div>
+          <div>
+            <div class="role-name">Ana Torres</div>
+            <div class="role-tag">Recepção</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">
+        <h1 id="topTitle">Visão do dia</h1>
+        <div class="topbar-date" id="topDate"></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" title="Mudar tema"></button>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="globalSearch" placeholder="Buscar paciente ou telefone…">
+        </div>
+        <button class="btn btn-primary" id="btnNovaConsulta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Nova consulta
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- VISÃO DO DIA -->
+      <section class="view active" id="view-dia">
+        <div class="stat-grid" id="statGrid"></div>
+        <div class="section-head">
+          <div>
+            <h2 id="diaHeading">Consultas de hoje</h2>
+            <div class="section-sub" id="diaSub"></div>
+          </div>
+        </div>
+        <div class="timeline" id="diaTimeline"></div>
+      </section>
+
+      <!-- AGENDA -->
+      <section class="view" id="view-agenda">
+        <div class="agenda-toolbar">
+          <div class="date-nav">
+            <button class="icon-btn" id="weekPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <span id="weekLabel">24–28 de agosto, 2026</span>
+            <button class="icon-btn" id="weekNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+          <div class="seg"><button class="active">Semana</button><button id="agendaDiaBtn">Dia</button></div>
+        </div>
+        <div class="week-scroll">
+          <div class="week-grid" id="weekGrid"></div>
+        </div>
+      </section>
+
+      <!-- PACIENTES -->
+      <section class="view" id="view-pacientes">
+        <div class="filter-row">
+          <div class="search-box" style="min-width:280px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="patientSearch" placeholder="Buscar por nome ou telefone…">
+          </div>
+          <button class="btn" id="btnNovoPaciente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Novo paciente
+          </button>
+        </div>
+        <div class="card" style="padding:6px 0; overflow-x:auto;">
+          <table class="plist">
+            <thead><tr><th>Paciente</th><th>Telefone</th><th>Convênio</th><th>Última consulta</th><th>Próxima</th><th></th></tr></thead>
+            <tbody id="patientRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- WHATSAPP -->
+      <section class="view" id="view-whatsapp">
+        <div class="demo-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.2h.01"/><path d="M10.3 3.9L2.6 18a1.8 1.8 0 001.6 2.7h15.6a1.8 1.8 0 001.6-2.7L13.7 3.9a1.8 1.8 0 00-3.4 0z"/></svg>
+          <div>
+            <b>Modo demonstração — nenhuma mensagem aqui é enviada de verdade.</b>
+            Para conectar o WhatsApp real da clínica, é preciso um provedor de API do WhatsApp Business. Veja as opções em Configurações → Conexão com WhatsApp.
+          </div>
+        </div>
+        <div class="wa-shell">
+          <div class="wa-list" id="waList"></div>
+          <div class="wa-main" id="waMain"></div>
+        </div>
+      </section>
+
+      <!-- FINANCEIRO (somente médica) -->
+      <section class="view" id="view-financeiro">
+        <div class="seg" id="finPanelSeg" style="margin-bottom:20px;">
+          <button class="active" data-panel="overview">Visão geral</button>
+          <button data-panel="notas">Notas fiscais (NFS-e)</button>
+        </div>
+
+        <div class="fin-subview active" id="finPanelOverview">
+        <div class="stat-grid" id="finStatGrid"></div>
+
+        <div class="card" style="padding:20px; margin-bottom:20px;">
+          <div class="section-head">
+            <div>
+              <h2>Convênios a receber</h2>
+              <div class="section-sub">Calculado automaticamente: atendimentos concluídos × tabela de valores de cada convênio, em Configurações → Tabela de convênios.</div>
+            </div>
+          </div>
+          <table class="plist" style="margin-top:4px;">
+            <thead><tr><th>Paciente</th><th>Convênio</th><th>Atendimento</th><th style="text-align:right;">Valor</th><th style="text-align:right;"></th></tr></thead>
+            <tbody id="convenioRows"></tbody>
+          </table>
+        </div>
+
+        <div class="card" style="padding:20px 20px 12px; margin-bottom:20px;">
+          <div class="section-head">
+            <div>
+              <h2 id="finChartTitle">Dia a dia de agosto</h2>
+              <div class="section-sub" id="finChartSub">Atualizado até 25/08 — cada lançamento novo entra na hora</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <div class="fin-legend" id="finLegend"></div>
+              <div class="seg" id="finChartModeSeg">
+                <button class="active" data-mode="diario">Dia a dia</button>
+                <button data-mode="mensal">6 meses</button>
+              </div>
+            </div>
+          </div>
+          <div id="finChart"></div>
+        </div>
+
+        <div class="filter-row" style="align-items:center; justify-content:space-between;">
+          <div class="seg" id="finFilterSeg">
+            <button class="active" data-filter="todas">Todas</button>
+            <button data-filter="entrada">Entradas</button>
+            <button data-filter="saida">Saídas</button>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btnNovaTransacao">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Nova transação
+          </button>
+        </div>
+        <div class="card" style="padding:6px 0; overflow-x:auto;">
+          <table class="plist">
+            <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th style="text-align:right;">Valor</th></tr></thead>
+            <tbody id="finRows"></tbody>
+          </table>
+        </div>
+        <div class="section-sub" style="margin-top:10px;">Mostrando as transações mais recentes de agosto.</div>
+        </div>
+
+        <div class="fin-subview" id="finPanelNotas">
+          <div class="demo-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.2h.01"/><path d="M10.3 3.9L2.6 18a1.8 1.8 0 001.6 2.7h15.6a1.8 1.8 0 001.6-2.7L13.7 3.9a1.8 1.8 0 00-3.4 0z"/></svg>
+            <div>
+              <b>Modo rascunho — isto ainda não emite nenhuma nota fiscal de verdade.</b>
+              Uma clínica presta serviço, então o documento correto aqui é a <b>NFS-e</b> (nota de serviço, emitida pela prefeitura), não a NF-e de mercadorias. A emissão oficial de verdade exige certificado digital A1 da clínica e integração com a prefeitura — veja as opções em Configurações → Notas fiscais (NFS-e).
+            </div>
+          </div>
+
+          <div class="config-grid">
+            <div class="card" style="padding:20px;">
+              <div class="section-head"><h2>Dados da nota</h2></div>
+              <div class="field"><label>Paciente / tomador do serviço</label>
+                <select id="nfPatient"></select>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <div class="field" style="flex:1;"><label>CPF do tomador</label><input type="text" id="nfCpf" placeholder="000.000.000-00"></div>
+                <div class="field" style="flex:1;"><label>Data da prestação</label><input type="date" id="nfData" value="2026-08-25"></div>
+              </div>
+              <div class="field"><label>Descrição do serviço</label><input type="text" id="nfDescricao" value="Consulta médica — clínica geral"></div>
+              <div class="field"><label>Código de serviço (LC 116/2003)</label>
+                <select id="nfCodigo">
+                  <option value="4.01">4.01 — Medicina e biomedicina</option>
+                  <option value="4.02">4.02 — Análises clínicas e laboratoriais</option>
+                  <option value="4.22">4.22 — Planos de saúde e convênios médicos</option>
+                </select>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <div class="field" style="flex:1;"><label>Valor do serviço (R$)</label><input type="number" id="nfValor" min="0" step="0.01" value="350"></div>
+                <div class="field" style="flex:1;"><label>Alíquota ISS (%)</label><input type="number" id="nfAliquota" min="0" max="5" step="0.5" value="3"></div>
+              </div>
+              <div class="field"><label>Observações</label><textarea rows="2" id="nfObs" placeholder="Ex.: consulta de retorno, sem materiais utilizados"></textarea></div>
+              <button class="btn btn-primary" id="nfSaveDraft" style="width:100%; justify-content:center;">Salvar rascunho</button>
+            </div>
+
+            <div>
+              <div class="section-sub" style="margin-bottom:8px;">Pré-visualização — atualiza conforme você preenche</div>
+              <div id="nfPreview"></div>
+            </div>
+          </div>
+
+          <div class="section-head" style="margin-top:24px;">
+            <h2>Rascunhos salvos</h2>
+          </div>
+          <div class="card" style="padding:6px 0; overflow-x:auto;">
+            <table class="plist">
+              <thead><tr><th>Data</th><th>Tomador</th><th>Serviço</th><th style="text-align:right;">Valor</th><th></th><th></th></tr></thead>
+              <tbody id="nfRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONFIGURAÇÕES -->
+      <section class="view" id="view-config">
+        <div class="config-grid">
+          <div>
+            <div class="card" style="padding:20px; margin-bottom:20px;">
+              <div class="section-head"><h2>Dados da clínica</h2></div>
+              <div class="field"><label>Nome da clínica</label><input type="text" value="Clínica Vitalis"></div>
+              <div class="field"><label>Endereço</label><input type="text" value="Av. Rebouças, 1230 — São Paulo, SP"></div>
+              <div class="field"><label>Horário de funcionamento</label><input type="text" value="Seg. a sex., 08h às 18h"></div>
+              <button class="btn btn-primary">Salvar alterações</button>
+            </div>
+
+            <div class="card" style="padding:20px; margin-bottom:20px;">
+              <div class="section-head">
+                <div>
+                  <h2>Tabela de convênios</h2>
+                  <div class="section-sub">Valor pago por atendimento, por convênio. É a partir daqui que o Financeiro calcula sozinho o "Convênios a receber".</div>
+                </div>
+              </div>
+              <table class="plist" style="margin-top:4px;">
+                <thead><tr><th>Convênio</th><th style="text-align:right;">1ª consulta</th><th style="text-align:right;">Consulta</th><th style="text-align:right;">Retorno</th><th></th></tr></thead>
+                <tbody id="convenioTableRows"></tbody>
+              </table>
+              <div style="display:flex; gap:8px; margin-top:14px; align-items:flex-end; flex-wrap:wrap;">
+                <div class="field" style="flex:1; min-width:130px; margin:0;"><label>Novo convênio</label><input type="text" id="cvNewName" placeholder="Ex.: Unimed"></div>
+                <div class="field" style="width:96px; margin:0;"><label>1ª consulta</label><input type="number" id="cvNewPrimeira" min="0" step="1" placeholder="R$"></div>
+                <div class="field" style="width:96px; margin:0;"><label>Consulta</label><input type="number" id="cvNewConsulta" min="0" step="1" placeholder="R$"></div>
+                <div class="field" style="width:96px; margin:0;"><label>Retorno</label><input type="number" id="cvNewRetorno" min="0" step="1" placeholder="R$"></div>
+                <button class="btn btn-primary btn-sm" id="cvAddBtn" style="height:38px;">+ Adicionar</button>
+              </div>
+            </div>
+
+            <div class="card" style="padding:20px;">
+              <div class="section-head">
+                <h2>Conexão com WhatsApp</h2>
+                <span class="pill pill-demo">Demonstração</span>
+              </div>
+              <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+                Este protótipo simula conversas de WhatsApp para validar o design. Para conectar o número real da clínica, escolha um provedor de API do WhatsApp Business:
+              </p>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">Meta Cloud API (oficial)</div>
+                  <div class="provider-desc">Direto com a Meta. Gratuito até certo volume, exige verificação da empresa.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">Twilio WhatsApp API</div>
+                  <div class="provider-desc">Integração facilitada, cobrança por mensagem, boa documentação.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">Z-API / provedores não oficiais</div>
+                  <div class="provider-desc">Configuração rápida via QR code, sem verificação de empresa — maior risco de bloqueio.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+            </div>
+
+            <div class="card" style="padding:20px; margin-top:20px;">
+              <div class="section-head">
+                <h2>Prescrição digital</h2>
+                <span class="pill pill-demo">Demonstração</span>
+              </div>
+              <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+                O botão "Receitar" já existe no protótipo, mas hoje só simula o fluxo. Para prescrição e assinatura digital de verdade, a integração indicada é com a Memed:
+              </p>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">Memed — prescrição eletrônica</div>
+                  <div class="provider-desc">Banco de medicamentos, alertas de interação e assinatura digital com validade legal. Requer que a clínica se torne parceira e que a médica tenha conta própria na Memed.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+            </div>
+
+            <div class="card" style="padding:20px; margin-top:20px;">
+              <div class="section-head">
+                <h2>Notas fiscais (NFS-e)</h2>
+                <span class="pill pill-demo">Demonstração</span>
+              </div>
+              <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+                Em Financeiro → Notas fiscais, a clínica já consegue montar o rascunho de uma NFS-e (nota de serviço). A emissão oficial, com numeração e validade fiscal de verdade, depende de uma integração — duas rotas possíveis:
+              </p>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">NFS-e Nacional (gov.br/nfse)</div>
+                  <div class="provider-desc">Sistema público unificado, mantido pelo governo federal em conjunto com os municípios. Tem API própria, mas a adesão ainda está em rollout progressivo — depende do município da clínica já ter migrado.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+              <div class="provider-row">
+                <div style="flex:1;">
+                  <div class="provider-name">Provedores privados (Focus NFe, eNotas, PlugNotas...)</div>
+                  <div class="provider-desc">APIs comerciais que já abstraem as regras de cada município. Caminho mais rápido hoje; exige certificado digital A1 da clínica (e-CNPJ) e plano pago por volume de notas.</div>
+                </div>
+                <button class="btn btn-sm">Saiba mais</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:20px;">
+            <div class="section-head"><h2>Usuários</h2></div>
+            <div class="user-row">
+              <div class="avatar" style="background:var(--primary-soft); color:var(--primary-strong);">MD</div>
+              <div><div style="font-weight:600; font-size:13px;">Dra. Marina Duarte</div><div style="font-size:12px; color:var(--text-faint);">Médica · acesso total</div></div>
+            </div>
+            <div class="user-row">
+              <div class="avatar" style="background:var(--info-soft); color:var(--info);">AT</div>
+              <div><div style="font-weight:600; font-size:13px;">Ana Torres</div><div style="font-size:12px; color:var(--text-faint);">Recepção · agenda e pacientes</div></div>
+            </div>
+            <button class="btn btn-sm" style="margin-top:12px;">+ Convidar usuário</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- chat drawer -->
+<div class="scrim" id="scrim"></div>
+<div class="drawer" id="chatDrawer">
+  <div class="drawer-head">
+    <div class="avatar" id="chatAvatar"></div>
+    <div style="flex:1;">
+      <div style="font-weight:600; font-size:14px;" id="chatName"></div>
+      <div style="font-size:12px; color:var(--text-faint);" id="chatPhone"></div>
+    </div>
+    <button class="icon-btn drawer-close" id="closeChatDrawer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="chatThread" style="display:flex; flex-direction:column; gap:10px;"></div>
+  <div class="wa-input-row">
+    <input type="text" id="chatInput" placeholder="Digite uma mensagem (simulada)…">
+    <button class="btn btn-primary btn-sm" id="chatSend">Enviar</button>
+  </div>
+</div>
+
+<!-- patient drawer -->
+<div class="drawer" id="patientDrawer">
+  <div class="drawer-head">
+    <div class="avatar" id="pdAvatar"></div>
+    <div style="flex:1;">
+      <div style="font-weight:600; font-size:14px;" id="pdName"></div>
+      <div style="font-size:12px; color:var(--text-faint);" id="pdMeta"></div>
+    </div>
+    <button class="icon-btn drawer-close" id="closePatientDrawer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <div style="display:flex; gap:8px; margin-bottom:18px;">
+      <button class="btn btn-primary btn-sm" id="pdMsgBtn">Enviar mensagem</button>
+      <button class="btn btn-sm" id="pdAgendarBtn">Agendar consulta</button>
+      <button class="btn btn-sm" id="pdRxBtn">Receitar</button>
+    </div>
+    <div class="section-head"><h2 style="font-size:14px;">Histórico</h2></div>
+    <div id="pdHistory"></div>
+  </div>
+</div>
+
+<!-- nova consulta modal -->
+<div class="modal" id="modalConsulta">
+  <div class="modal-card">
+    <div class="modal-head"><h3>Nova consulta</h3><button class="icon-btn" data-close-modal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label>Paciente</label>
+        <select id="mcPatient"></select>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <div class="field" style="flex:1;"><label>Data</label><input type="date" id="mcDate" value="2026-08-25"></div>
+        <div class="field" style="flex:1;"><label>Horário</label><input type="time" id="mcTime" value="14:00"></div>
+      </div>
+      <div class="field"><label>Tipo</label>
+        <select id="mcType"><option>Consulta</option><option>Retorno</option><option>Primeira consulta</option><option>Exame</option></select>
+      </div>
+      <div class="field"><label>Observações</label><textarea rows="2" id="mcNotes"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" id="mcSave">Agendar</button>
+    </div>
+  </div>
+</div>
+
+<!-- novo paciente modal -->
+<div class="modal" id="modalPaciente">
+  <div class="modal-card">
+    <div class="modal-head"><h3>Novo paciente</h3><button class="icon-btn" data-close-modal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label>Nome completo</label><input type="text" id="npName" placeholder="Ex.: Fernanda Ribeiro"></div>
+      <div style="display:flex; gap:10px;">
+        <div class="field" style="flex:1;"><label>Telefone (WhatsApp)</label><input type="text" id="npPhone" placeholder="(11) 90000-0000"></div>
+        <div class="field" style="flex:1;"><label>Data de nascimento</label><input type="date" id="npBirth"></div>
+      </div>
+      <div class="field"><label>Convênio</label><input type="text" id="npPlan" placeholder="Particular, Amil, Bradesco…"></div>
+      <div class="field"><label>Observações</label><textarea rows="2" id="npNotes"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" id="npSave">Salvar paciente</button>
+    </div>
+  </div>
+</div>
+
+<!-- receitar (Memed) modal -->
+<div class="modal" id="modalPrescricao">
+  <div class="modal-card" style="max-width:520px;">
+    <div class="modal-head">
+      <h3>Nova prescrição <span style="font-weight:400; color:var(--text-faint); font-size:13px;">via Memed</span></h3>
+      <button class="icon-btn" data-close-modal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="demo-banner" style="margin-bottom:16px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.2h.01"/><path d="M10.3 3.9L2.6 18a1.8 1.8 0 001.6 2.7h15.6a1.8 1.8 0 001.6-2.7L13.7 3.9a1.8 1.8 0 00-3.4 0z"/></svg>
+        <div>
+          <b>Integração simulada — nenhuma receita real é emitida aqui.</b>
+          A prescrição e a assinatura digital de verdade seriam feitas pela Memed, parceira oficial de prescrição eletrônica. Isso exige cadastro da clínica como parceiro e conta Memed da médica.
+        </div>
+      </div>
+      <div class="field"><label>Paciente</label><input type="text" id="rxPatientName" disabled></div>
+      <div class="field">
+        <label>Adicionar item à receita</label>
+        <div class="rx-add-row">
+          <input type="text" id="rxItemInput" placeholder="Ex.: Amoxicilina 500mg — 1 cápsula a cada 8h por 7 dias">
+          <button class="btn btn-sm" id="rxAddItem">+ Adicionar</button>
+        </div>
+      </div>
+      <div id="rxItems"></div>
+      <div class="field"><label>Observações</label><textarea rows="2" id="rxNotes" placeholder="Ex.: retornar em 10 dias se sintomas persistirem"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" id="rxSave">Emitir e assinar (Memed)</button>
+    </div>
+  </div>
+</div>
+
+<!-- nova transação (financeiro) modal -->
+<div class="modal" id="modalTransacao">
+  <div class="modal-card">
+    <div class="modal-head"><h3>Nova transação</h3><button class="icon-btn" data-close-modal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label>Tipo</label>
+        <div class="seg" id="txTypeSeg" style="width:100%;">
+          <button type="button" class="active" data-type="entrada" style="flex:1;">Entrada</button>
+          <button type="button" data-type="saida" style="flex:1;">Saída</button>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <div class="field" style="flex:1;"><label>Valor (R$)</label><input type="number" id="txValor" placeholder="0,00" min="0" step="0.01"></div>
+        <div class="field" style="flex:1;"><label>Data</label><input type="date" id="txData" value="2026-08-25"></div>
+      </div>
+      <div class="field"><label>Categoria</label>
+        <select id="txCategoria"></select>
+      </div>
+      <div class="field"><label>Descrição</label><input type="text" id="txDescricao" placeholder="Ex.: Consulta particular — Nome do paciente"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" id="txSave">Salvar transação</button>
+    </div>
+  </div>
+</div>
+
+<div class="fin-tooltip" id="finTooltip"></div>
+<div class="status-menu" id="statusMenu"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- mock data ---------------- */
+  var patients = [
+    {id:1, name:"Beatriz Souza", phone:"(11) 98221-4470", plan:"Amil", last:"12/08/2026", next:"25/08/2026", history:[
+      {date:"12/08/2026", note:"Retorno de rotina — pressão controlada."},
+      {date:"02/05/2026", note:"Consulta inicial — check-up anual."}
+    ]},
+    {id:2, name:"Rafael Lima", phone:"(11) 99887-2201", plan:"Particular", last:"03/07/2026", next:"25/08/2026", history:[
+      {date:"03/07/2026", note:"Avaliação de exames de sangue."}
+    ]},
+    {id:3, name:"Helena Martins", phone:"(21) 98765-1122", plan:"Bradesco Saúde", last:"—", next:"25/08/2026", history:[]},
+    {id:4, name:"João Pedro Alves", phone:"(11) 97711-0099", plan:"Particular", last:"30/06/2026", next:"25/08/2026", history:[
+      {date:"30/06/2026", note:"Queixa de dor lombar — encaminhado para fisioterapia."}
+    ]},
+    {id:5, name:"Camila Rocha", phone:"(11) 98432-5567", plan:"SulAmérica", last:"14/07/2026", next:"25/08/2026", history:[
+      {date:"14/07/2026", note:"Retorno — resultados de exame dentro do esperado."}
+    ]},
+    {id:6, name:"Eduardo Santos", phone:"(11) 99120-8834", plan:"Particular", last:"—", next:"25/08/2026", history:[]},
+    {id:7, name:"Larissa Fontes", phone:"(11) 98890-3345", plan:"Amil", last:"20/08/2026", next:"25/08/2026", history:[
+      {date:"20/08/2026", note:"Consulta de acompanhamento."}
+    ]},
+    {id:8, name:"Marcos Vidal", phone:"(11) 97654-2210", plan:"Particular", last:"15/08/2026", next:"27/08/2026", history:[
+      {date:"15/08/2026", note:"Solicitação de exames de rotina."}
+    ]}
+  ];
+
+  // week: seg 24/08 .. sex 28/08 2026 — today = ter 25/08
+  var week = [
+    {key:"seg", label:"Seg", num:24},
+    {key:"ter", label:"Ter", num:25, today:true},
+    {key:"qua", label:"Qua", num:26},
+    {key:"qui", label:"Qui", num:27},
+    {key:"sex", label:"Sex", num:28}
+  ];
+
+  var appointments = [
+    {id:101, day:"seg", start:"09:30", end:"10:15", patientId:8, type:"Consulta", status:"concluido"},
+    {id:102, day:"seg", start:"11:00", end:"11:30", patientId:7, type:"Retorno", status:"concluido", billed:false},
+    {id:103, day:"seg", start:"15:00", end:"15:40", patientId:5, type:"Retorno", status:"concluido", billed:true},
+    {id:104, day:"seg", start:"16:00", end:"16:40", patientId:3, type:"Primeira consulta", status:"concluido", billed:false},
+
+    {id:1, day:"ter", start:"09:00", end:"09:30", patientId:1, type:"Retorno", status:"concluido", billed:false},
+    {id:2, day:"ter", start:"10:30", end:"11:00", patientId:2, type:"Consulta", status:"concluido"},
+    {id:3, day:"ter", start:"11:00", end:"11:45", patientId:3, type:"Primeira consulta", status:"atendimento"},
+    {id:4, day:"ter", start:"14:00", end:"14:30", patientId:4, type:"Consulta", status:"aguardando"},
+    {id:5, day:"ter", start:"15:30", end:"16:00", patientId:5, type:"Retorno", status:"aguardando"},
+    {id:6, day:"ter", start:"16:15", end:"16:45", patientId:6, type:"Consulta", status:"aguardando"},
+    {id:7, day:"ter", start:"17:00", end:"17:30", patientId:7, type:"Retorno", status:"cancelado"},
+
+    {id:201, day:"qua", start:"08:30", end:"09:00", patientId:2, type:"Retorno", status:"aguardando"},
+    {id:202, day:"qua", start:"10:00", end:"10:40", patientId:6, type:"Primeira consulta", status:"aguardando"},
+    {id:203, day:"qua", start:"13:30", end:"14:00", patientId:1, type:"Consulta", status:"aguardando"},
+
+    {id:301, day:"qui", start:"09:00", end:"09:30", patientId:3, type:"Retorno", status:"aguardando"},
+    {id:302, day:"qui", start:"11:30", end:"12:00", patientId:8, type:"Consulta", status:"aguardando"},
+
+    {id:401, day:"sex", start:"08:00", end:"08:40", patientId:4, type:"Primeira consulta", status:"aguardando"},
+    {id:402, day:"sex", start:"14:30", end:"15:00", patientId:5, type:"Consulta", status:"aguardando"}
+  ];
+
+  var conversations = [
+    {patientId:1, unread:1, messages:[
+      {from:"in", text:"Oi, doutora! Confirmando minha consulta de hoje às 9h.", time:"08:12"},
+      {from:"out", text:"Bom dia, Beatriz! Confirmado, te espero às 9h.", time:"08:15"},
+      {from:"in", text:"Perfeito, obrigada! 🙏", time:"08:16"}
+    ]},
+    {patientId:2, unread:0, messages:[
+      {from:"out", text:"Rafael, seus exames chegaram e estão dentro do esperado.", time:"Seg 17:40"},
+      {from:"in", text:"Que ótima notícia, doutora! Muito obrigado.", time:"Seg 17:52"}
+    ]},
+    {patientId:3, unread:2, messages:[
+      {from:"in", text:"Boa tarde! Posso chegar 10 minutos antes da consulta?", time:"10:20"},
+      {from:"in", text:"Também queria saber se preciso levar algum exame anterior.", time:"10:21"}
+    ]},
+    {patientId:5, unread:0, messages:[
+      {from:"out", text:"Camila, lembrete: sua consulta é hoje às 15h30.", time:"07:30"},
+      {from:"in", text:"Combinado, estarei lá!", time:"07:41"}
+    ]},
+    {patientId:8, unread:2, messages:[
+      {from:"in", text:"Doutor(a), posso remarcar para quinta-feira?", time:"Ontem"},
+      {from:"in", text:"Fico no aguardo, obrigado.", time:"Ontem"}
+    ]}
+  ];
+
+  // agregados dos 5 meses já fechados (histórico) — agosto é sempre calculado em tempo real a partir dos lançamentos abaixo
+  var finMonthly = [
+    {key:"mar", label:"Mar", entrada:26400, saida:18200},
+    {key:"abr", label:"Abr", entrada:29800, saida:17600},
+    {key:"mai", label:"Mai", entrada:31200, saida:19400},
+    {key:"jun", label:"Jun", entrada:28950, saida:16800},
+    {key:"jul", label:"Jul", entrada:33700, saida:20100}
+  ];
+  var HOJE = "2026-08-25";
+  var MES_ATUAL = "2026-08";
+
+  // tabela de valores por convênio (o quanto cada convênio paga por tipo de atendimento) —
+  // "a receber (convênios)" é sempre calculado ao vivo a partir daqui + dos atendimentos concluídos ainda não marcados como recebidos
+  var convenioTabela = {
+    "Amil": {"Primeira consulta": 260, "Consulta": 220, "Retorno": 150},
+    "Bradesco Saúde": {"Primeira consulta": 280, "Consulta": 240, "Retorno": 165},
+    "SulAmérica": {"Primeira consulta": 250, "Consulta": 210, "Retorno": 145}
+  };
+
+  // lançamentos de agosto, dia a dia — esta lista é a única fonte de verdade:
+  // os totais do mês e o gráfico "dia a dia" são somados a partir dela, então
+  // qualquer novo lançamento já atualiza tudo automaticamente.
+  var finTransactions = [
+    {id:1, date:"2026-08-25", desc:"Consulta particular — Beatriz Souza", cat:"Consulta particular", type:"entrada", value:350},
+    {id:2, date:"2026-08-25", desc:"Consulta particular — Rafael Lima", cat:"Consulta particular", type:"entrada", value:350},
+    {id:3, date:"2026-08-24", desc:"Consulta particular — Rafael Lima", cat:"Consulta particular", type:"entrada", value:350},
+    {id:4, date:"2026-08-22", desc:"Consulta particular — Helena Martins", cat:"Consulta particular", type:"entrada", value:340},
+    {id:5, date:"2026-08-21", desc:"Consulta particular — João Pedro Alves", cat:"Consulta particular", type:"entrada", value:280},
+    {id:6, date:"2026-08-20", desc:"Consulta particular — Larissa Fontes", cat:"Consulta particular", type:"entrada", value:280},
+    {id:7, date:"2026-08-20", desc:"Materiais de consumo", cat:"Materiais", type:"saida", value:540},
+    {id:8, date:"2026-08-19", desc:"Consulta particular — Beatriz Souza", cat:"Consulta particular", type:"entrada", value:350},
+    {id:9, date:"2026-08-18", desc:"Consulta particular — Eduardo Santos", cat:"Consulta particular", type:"entrada", value:320},
+    {id:10, date:"2026-08-18", desc:"Repasse convênio Amil", cat:"Convênio", type:"entrada", value:2180},
+    {id:11, date:"2026-08-17", desc:"Consulta particular — Helena Martins", cat:"Consulta particular", type:"entrada", value:350},
+    {id:12, date:"2026-08-15", desc:"Salário — recepção", cat:"Salários", type:"saida", value:3100},
+    {id:13, date:"2026-08-14", desc:"Consulta particular — João Pedro Alves", cat:"Consulta particular", type:"entrada", value:280},
+    {id:14, date:"2026-08-13", desc:"Consulta particular — Marcos Vidal", cat:"Consulta particular", type:"entrada", value:300},
+    {id:15, date:"2026-08-12", desc:"Consulta particular — Camila Rocha", cat:"Consulta particular", type:"entrada", value:320},
+    {id:16, date:"2026-08-12", desc:"Repasse convênio Bradesco Saúde", cat:"Convênio", type:"entrada", value:1940},
+    {id:17, date:"2026-08-11", desc:"Consulta particular — Rafael Lima", cat:"Consulta particular", type:"entrada", value:350},
+    {id:18, date:"2026-08-11", desc:"Marketing (Instagram Ads)", cat:"Marketing", type:"saida", value:450},
+    {id:19, date:"2026-08-10", desc:"Consulta particular — Beatriz Souza", cat:"Consulta particular", type:"entrada", value:350},
+    {id:20, date:"2026-08-10", desc:"Contador e impostos", cat:"Impostos", type:"saida", value:1450},
+    {id:21, date:"2026-08-08", desc:"Consulta particular — Marcos Vidal", cat:"Consulta particular", type:"entrada", value:320},
+    {id:22, date:"2026-08-07", desc:"Consulta particular — João Pedro Alves", cat:"Consulta particular", type:"entrada", value:280},
+    {id:23, date:"2026-08-07", desc:"Materiais de consumo", cat:"Materiais", type:"saida", value:680},
+    {id:24, date:"2026-08-06", desc:"Consulta particular — Camila Rocha", cat:"Consulta particular", type:"entrada", value:320},
+    {id:25, date:"2026-08-05", desc:"Consulta particular — Helena Martins", cat:"Consulta particular", type:"entrada", value:350},
+    {id:26, date:"2026-08-05", desc:"Repasse convênio SulAmérica", cat:"Convênio", type:"entrada", value:1560},
+    {id:27, date:"2026-08-04", desc:"Consulta particular — Eduardo Santos", cat:"Consulta particular", type:"entrada", value:320},
+    {id:28, date:"2026-08-03", desc:"Consulta particular — Larissa Fontes", cat:"Consulta particular", type:"entrada", value:280},
+    {id:29, date:"2026-08-01", desc:"Consulta particular — Marcos Vidal", cat:"Consulta particular", type:"entrada", value:300},
+    {id:30, date:"2026-08-01", desc:"Aluguel da sala", cat:"Aluguel", type:"saida", value:3200}
+  ];
+  var finCategorias = {
+    entrada: ["Consulta particular", "Convênio", "Procedimento", "Outra receita"],
+    saida: ["Aluguel", "Materiais", "Salários", "Impostos", "Marketing", "Outra despesa"]
+  };
+
+  var statusLabel = {aguardando:"Aguardando", atendimento:"Em atendimento", concluido:"Concluído", cancelado:"Cancelado"};
+  var STATUS_OPTIONS = [
+    {key:"aguardando", label:"Aguardando", varName:"warning"},
+    {key:"atendimento", label:"Em atendimento", varName:"info"},
+    {key:"concluido", label:"Concluído", varName:"success"},
+    {key:"cancelado", label:"Cancelado", varName:"danger"}
+  ];
+
+  /* ---------------- state ---------------- */
+  var currentRole = "medica";
+  var activeChatPatientId = null;
+  var todayAppts = appointments.filter(function(a){ return a.day === "ter"; });
+
+  function patientById(id){ return patients.filter(function(p){ return p.id===id; })[0]; }
+  function apptById(id){ return appointments.filter(function(a){ return a.id===id; })[0]; }
+  function initials(name){ var parts=name.split(" "); return (parts[0][0]+(parts[1]?parts[1][0]:"")).toUpperCase(); }
+  function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+  /* ---------------- theme toggle ---------------- */
+  var themeToggleBtn = document.getElementById("themeToggle");
+  var iconSun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.3"/><path d="M12 2.5v2.6M12 18.9v2.6M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>';
+  var iconMoon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 14.7A8.5 8.5 0 119.3 3.8a7 7 0 0010.9 10.9z"/></svg>';
+
+  function getStoredTheme(){
+    try { return localStorage.getItem("vitalis-theme"); } catch(e){ return null; }
+  }
+  function setStoredTheme(v){
+    try { localStorage.setItem("vitalis-theme", v); } catch(e){}
+  }
+  function systemPrefersDark(){
+    return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+  function effectiveTheme(){
+    var attr = document.documentElement.getAttribute("data-theme");
+    if (attr === "light" || attr === "dark") return attr;
+    return systemPrefersDark() ? "dark" : "light";
+  }
+  function updateThemeToggleIcon(){
+    var eff = effectiveTheme();
+    themeToggleBtn.innerHTML = eff === "dark" ? iconSun : iconMoon;
+    themeToggleBtn.title = eff === "dark" ? "Mudar para tema claro" : "Mudar para tema escuro";
+  }
+  function applyTheme(theme){
+    document.documentElement.setAttribute("data-theme", theme);
+    setStoredTheme(theme);
+    updateThemeToggleIcon();
+  }
+  themeToggleBtn.addEventListener("click", function(){
+    applyTheme(effectiveTheme() === "dark" ? "light" : "dark");
+  });
+  updateThemeToggleIcon();
+
+  /* ---------------- nav / views ---------------- */
+  var navItems = document.querySelectorAll(".nav-item");
+  var views = document.querySelectorAll(".view");
+  var titles = {dia:"Visão do dia", agenda:"Agenda", pacientes:"Pacientes", whatsapp:"WhatsApp", financeiro:"Financeiro", config:"Configurações"};
+
+  function showView(key){
+    navItems.forEach(function(n){ n.classList.toggle("active", n.dataset.view===key); });
+    views.forEach(function(v){ v.classList.toggle("active", v.id === "view-"+key); });
+    document.getElementById("topTitle").textContent = titles[key];
+  }
+  navItems.forEach(function(n){
+    n.addEventListener("click", function(){ showView(n.dataset.view); });
+  });
+
+  document.getElementById("topDate").textContent =
+    "Terça-feira, 25 de agosto de 2026";
+
+  /* ---------------- role switch ---------------- */
+  var roleOpts = document.querySelectorAll(".role-opt");
+  roleOpts.forEach(function(r){
+    r.addEventListener("click", function(){
+      roleOpts.forEach(function(o){ o.classList.remove("active"); });
+      r.classList.add("active");
+      currentRole = r.dataset.role;
+      document.querySelectorAll(".nav-medica-only").forEach(function(el){
+        el.style.display = currentRole === "medica" ? "" : "none";
+      });
+      var activeView = document.querySelector(".nav-item.active");
+      var stillVisible = activeView && activeView.offsetParent !== null;
+      showView(currentRole === "medica" ? "dia" : (stillVisible ? activeView.dataset.view : "agenda"));
+      renderDia();
+      if (currentRole === "medica") renderFinanceiro();
+    });
+  });
+
+  /* ---------------- stat tiles + timeline (Visão do dia) ---------------- */
+  function renderDia(){
+    var counts = {aguardando:0, atendimento:0, concluido:0, cancelado:0};
+    todayAppts.forEach(function(a){ counts[a.status]++; });
+    var greetName = currentRole === "medica" ? "Dra. Marina" : "Ana";
+
+    document.getElementById("diaHeading").textContent = "Bom dia, " + greetName;
+    document.getElementById("diaSub").textContent = todayAppts.filter(function(a){return a.status!=="cancelado";}).length + " consultas confirmadas para hoje, terça-feira";
+
+    var stats = [
+      {label:"Consultas hoje", value: todayAppts.filter(function(a){return a.status!=="cancelado";}).length, tone:"primary", icon:"cal"},
+      {label:"Aguardando", value: counts.aguardando, tone:"warning", icon:"clock"},
+      {label:"Em atendimento", value: counts.atendimento, tone:"info", icon:"pulse"},
+      {label:"Concluídas", value: counts.concluido, tone:"success", icon:"check"}
+    ];
+    var iconSvg = {
+      cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>',
+      clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+      pulse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-7 4 14L16 12h5"/></svg>',
+      check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'
+    };
+    document.getElementById("statGrid").innerHTML = stats.map(function(s){
+      return '<div class="card stat-tile">' +
+        '<div class="stat-top"><div class="stat-icon" style="background:var(--'+s.tone+'-soft); color:var(--'+s.tone+');">'+iconSvg[s.icon]+'</div></div>' +
+        '<div class="stat-value">'+s.value+'</div>' +
+        '<div class="stat-label">'+s.label+'</div>' +
+      '</div>';
+    }).join("");
+
+    var nextId = null;
+    var upcoming = todayAppts.filter(function(a){ return a.status==="aguardando"; }).slice().sort(function(a,b){ return a.start.localeCompare(b.start); });
+    if (upcoming.length) nextId = upcoming[0].id;
+
+    var groupOrder = ["atendimento", "aguardando", "concluido", "cancelado"];
+    var groupLabel = {atendimento:"Em atendimento", aguardando:"Aguardando", concluido:"Já atendidos", cancelado:"Cancelados"};
+
+    var html = groupOrder.map(function(st){
+      var items = todayAppts.filter(function(a){ return a.status===st; }).sort(function(a,b){ return a.start.localeCompare(b.start); });
+      if (!items.length) return "";
+      return '<div class="timeline-group">' +
+        '<div class="timeline-group-label tg-'+st+'"><span class="dot"></span>'+groupLabel[st]+'<span class="count">'+items.length+'</span></div>' +
+        items.map(function(a){ return renderApptRow(a, nextId); }).join("") +
+      '</div>';
+    }).join("");
+
+    document.getElementById("diaTimeline").innerHTML = html || '<div class="empty">Nenhuma consulta hoje.</div>';
+  }
+
+  function renderApptRow(a, nextId){
+    var p = patientById(a.patientId);
+    return '<div class="appt-row st-'+a.status+' '+(a.id===nextId?"is-next":"")+'">' +
+      '<div class="appt-time">'+a.start+'<span>'+durMin(a.start,a.end)+' min</span></div>' +
+      '<div class="avatar">'+initials(p.name)+'</div>' +
+      '<div class="appt-info">' +
+        '<div class="appt-name">'+p.name+(a.id===nextId?' <span class="tag" style="background:var(--primary-soft); color:var(--primary-strong);">Próxima</span>':'')+'</div>' +
+        '<div class="appt-meta">'+a.type+' · '+p.plan+'</div>' +
+      '</div>' +
+      '<button class="pill pill-'+a.status+'" title="Mudar status" onclick="window.__openStatusMenu('+a.id+', event)">'+statusLabel[a.status]+
+        '<svg class="pill-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>' +
+      '<div class="row-actions">' +
+        '<button class="icon-btn" title="Enviar mensagem" onclick="window.__openChat('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.1-3.7A8 8 0 1112 20a8.3 8.3 0 01-4-1.1L4 20z"/></svg></button>' +
+        '<button class="icon-btn" title="Ver ficha" onclick="window.__openPatient('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/></svg></button>' +
+        '<button class="icon-btn" title="Receitar" onclick="window.__openPrescricao('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function durMin(s,e){
+    var sp=s.split(":"), ep=e.split(":");
+    return (parseInt(ep[0])*60+parseInt(ep[1])) - (parseInt(sp[0])*60+parseInt(sp[1]));
+  }
+
+  /* ---------------- agenda / week grid ---------------- */
+  var dayStartMin = 8*60, dayEndMin = 19*60, pxPerMin = 1.15;
+  function renderWeek(){
+    var html = '<div class="week-head-cell"></div>';
+    week.forEach(function(d){
+      html += '<div class="week-head-cell '+(d.today?"today":"")+'"><div class="d">'+d.label+'</div><div class="n">'+d.num+'</div></div>';
+    });
+    var colHeight = (dayEndMin-dayStartMin)*pxPerMin;
+    html += '<div class="time-col" style="height:'+colHeight+'px;">';
+    for (var h=8; h<=18; h++){
+      html += '<div class="time-label" style="top:'+((h*60-dayStartMin)*pxPerMin)+'px;">'+h+':00</div>';
+    }
+    html += '</div>';
+    week.forEach(function(d){
+      html += '<div class="day-col" style="height:'+colHeight+'px;">';
+      appointments.filter(function(a){ return a.day===d.key; }).forEach(function(a){
+        var sp=a.start.split(":"), ep=a.end.split(":");
+        var top = (parseInt(sp[0])*60+parseInt(sp[1]) - dayStartMin) * pxPerMin;
+        var height = Math.max(28, (durMin(a.start,a.end)) * pxPerMin - 2);
+        var p = patientById(a.patientId);
+        html += '<div class="appt-block st-'+a.status+'" style="top:'+top+'px; height:'+height+'px;" onclick="window.__openPatient('+p.id+')">' +
+          '<button class="status-dot" title="Mudar status" onclick="window.__openStatusMenu('+a.id+', event)"></button>' +
+          '<b>'+a.start+' '+p.name.split(" ")[0]+'</b><span>'+a.type+'</span>' +
+        '</div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById("weekGrid").innerHTML = html;
+  }
+
+  /* ---------------- pacientes ---------------- */
+  function renderPatients(filter){
+    filter = (filter||"").toLowerCase();
+    var rows = patients.filter(function(p){
+      return !filter || p.name.toLowerCase().indexOf(filter)>-1 || p.phone.indexOf(filter)>-1;
+    });
+    document.getElementById("patientRows").innerHTML = rows.map(function(p){
+      return '<tr class="prow" onclick="window.__openPatient('+p.id+')">' +
+        '<td><div class="p-name-cell"><div class="avatar" style="width:30px;height:30px;font-size:11px;">'+initials(p.name)+'</div>'+p.name+'</div></td>' +
+        '<td class="mono">'+p.phone+'</td>' +
+        '<td><span class="tag">'+p.plan+'</span></td>' +
+        '<td class="mono">'+p.last+'</td>' +
+        '<td class="mono">'+p.next+'</td>' +
+        '<td style="text-align:right;"><button class="icon-btn" title="Enviar mensagem" onclick="event.stopPropagation(); window.__openChat('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.1-3.7A8 8 0 1112 20a8.3 8.3 0 01-4-1.1L4 20z"/></svg></button></td>' +
+      '</tr>';
+    }).join("") || '<tr><td colspan="6" class="empty">Nenhum paciente encontrado.</td></tr>';
+  }
+
+  /* ---------------- whatsapp ---------------- */
+  function convFor(patientId){ return conversations.filter(function(c){ return c.patientId===patientId; })[0]; }
+
+  function renderWaList(){
+    document.getElementById("waList").innerHTML = conversations.map(function(c){
+      var p = patientById(c.patientId);
+      var last = c.messages[c.messages.length-1];
+      return '<div class="wa-conv '+(activeChatPatientId===p.id?"active":"")+'" onclick="window.__selectWaThread('+p.id+')">' +
+        '<div class="avatar" style="width:34px;height:34px;font-size:12px;">'+initials(p.name)+'</div>' +
+        '<div class="wa-conv-body">' +
+          '<div class="wa-conv-top"><span class="wa-conv-name">'+p.name+'</span><span class="wa-conv-time">'+last.time+'</span></div>' +
+          '<div class="wa-conv-preview">'+escapeHtml(last.text)+(c.unread?'<span class="wa-unread">'+c.unread+'</span>':'')+'</div>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  function renderWaMain(patientId){
+    var main = document.getElementById("waMain");
+    if (!patientId){
+      main.innerHTML = '<div class="wa-empty">Selecione uma conversa para visualizar</div>';
+      return;
+    }
+    var p = patientById(patientId);
+    var c = convFor(patientId);
+    c.unread = 0;
+    main.innerHTML =
+      '<div class="wa-thread-head"><div class="avatar" style="width:32px;height:32px;font-size:11px;">'+initials(p.name)+'</div>' +
+      '<div><div style="font-weight:600; font-size:13px;">'+p.name+'</div><div style="font-size:11.5px; color:var(--text-faint);" class="mono">'+p.phone+'</div></div></div>' +
+      '<div class="wa-thread-body" id="waThreadBody"></div>' +
+      '<div class="wa-input-row"><input type="text" id="waInput" placeholder="Digite uma mensagem (simulada)…"><button class="btn btn-primary btn-sm" id="waSendBtn">Enviar</button></div>';
+    fillThread("waThreadBody", c);
+    document.getElementById("waSendBtn").addEventListener("click", function(){ sendFrom("waInput", c, renderWaList); });
+    document.getElementById("waInput").addEventListener("keydown", function(e){ if(e.key==="Enter") sendFrom("waInput", c, renderWaList); });
+    updateWaBadge();
+    renderWaList();
+  }
+
+  function fillThread(elId, c){
+    var el = document.getElementById(elId);
+    el.innerHTML = c.messages.map(function(m){
+      return '<div class="bubble bubble-'+m.from+'">'+escapeHtml(m.text)+'<time>'+m.time+'</time></div>';
+    }).join("");
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function sendFrom(inputId, conv, afterList){
+    var input = document.getElementById(inputId);
+    var text = input.value.trim();
+    if (!text) return;
+    conv.messages.push({from:"out", text:text, time:"agora"});
+    input.value = "";
+    var threadElId = inputId==="waInput" ? "waThreadBody" : "chatThread";
+    fillThread(threadElId, conv);
+    if (afterList) afterList();
+    showToast("Mensagem simulada enviada");
+    setTimeout(function(){
+      conv.messages.push({from:"in", text:"(resposta simulada) Combinado, muito obrigado!", time:"agora"});
+      fillThread(threadElId, conv);
+      if (afterList) afterList();
+    }, 1200);
+  }
+
+  function updateWaBadge(){
+    var total = conversations.reduce(function(s,c){ return s + (c.unread||0); }, 0);
+    var badge = document.getElementById("waNavBadge");
+    badge.textContent = total;
+    badge.style.display = total ? "inline-flex" : "none";
+  }
+
+  window.__selectWaThread = function(patientId){ activeChatPatientId = patientId; renderWaMain(patientId); };
+
+  /* ---------------- financeiro (somente médica) ---------------- */
+  var finFilter = "todas";
+  var finTxType = "entrada";
+
+  function brl(v){ return "R$ " + Math.round(v).toLocaleString("pt-BR"); }
+  function brlCompact(v){ return v >= 1000 ? "R$" + (v/1000).toFixed(1).replace(".", ",") + "k" : "R$" + Math.round(v); }
+  function brDate(iso){ var p = iso.split("-"); return p[2] + "/" + p[1]; }
+
+  var finIcons = {
+    up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l6-6 4 4 8-8"/><path d="M15 5h6v6"/></svg>',
+    down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l6 6 4-4 8 8"/><path d="M15 19h6v-6"/></svg>',
+    balance: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20V13.5M10 20V6.5M16.5 20V15M3.5 20h13"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>'
+  };
+
+  // ---- convênios: valor a receber calculado ao vivo (atendimentos concluídos × tabela de valores) ----
+  function convenioValor(plan, tipo){
+    var t = convenioTabela[plan];
+    return t && typeof t[tipo] === "number" ? t[tipo] : null;
+  }
+  function convenioPendentes(){
+    return appointments.filter(function(a){
+      if (a.status !== "concluido" || a.billed) return false;
+      var p = patientById(a.patientId);
+      return p && p.plan !== "Particular" && convenioValor(p.plan, a.type) !== null;
+    }).map(function(a){
+      var p = patientById(a.patientId);
+      return {appt:a, patient:p, valor: convenioValor(p.plan, a.type)};
+    });
+  }
+  function convenioPendenteTotal(){
+    return convenioPendentes().reduce(function(sum, x){ return sum + x.valor; }, 0);
+  }
+
+  // ---- fonte única de verdade: tudo é somado a partir de finTransactions ----
+  function dayOfMonth(iso){ return parseInt(iso.slice(8, 10), 10); }
+  function isCurrentMonth(iso){ return iso.slice(0, 7) === MES_ATUAL; }
+
+  function computeMonthTotals(){
+    var entrada = 0, saida = 0;
+    finTransactions.forEach(function(t){
+      if (!isCurrentMonth(t.date)) return;
+      if (t.type === "entrada") entrada += t.value; else saida += t.value;
+    });
+    return {entrada: entrada, saida: saida};
+  }
+
+  function computeDaily(){
+    var byDay = {};
+    finTransactions.forEach(function(t){
+      if (!isCurrentMonth(t.date)) return;
+      var d = dayOfMonth(t.date);
+      if (!byDay[d]) byDay[d] = {entrada:0, saida:0};
+      byDay[d][t.type] += t.value;
+    });
+    var lastDay = dayOfMonth(HOJE);
+    var days = [];
+    for (var d = 1; d <= lastDay; d++){
+      var v = byDay[d] || {entrada:0, saida:0};
+      days.push({day:d, entrada:v.entrada, saida:v.saida, net: v.entrada - v.saida});
+    }
+    return days;
+  }
+
+  function renderFinStats(){
+    var totals = computeMonthTotals();
+    var saldo = totals.entrada - totals.saida;
+    var stats = [
+      {label:"Entradas (mês)", value: brl(totals.entrada), tone:"success", icon:"up"},
+      {label:"Saídas (mês)", value: brl(totals.saida), tone:"danger", icon:"down"},
+      {label:"Saldo (mês)", value: brl(saldo), tone:"primary", icon:"balance"},
+      {label:"A receber (convênios)", value: brl(convenioPendenteTotal()), tone:"info", icon:"clock"}
+    ];
+    document.getElementById("finStatGrid").innerHTML = stats.map(function(s){
+      return '<div class="card stat-tile">' +
+        '<div class="stat-top"><div class="stat-icon" style="background:var(--'+s.tone+'-soft); color:var(--'+s.tone+');">'+finIcons[s.icon]+'</div></div>' +
+        '<div class="stat-value">'+s.value+'</div>' +
+        '<div class="stat-label">'+s.label+'</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  function roundedTopRectPath(x, y, w, h, r){
+    r = Math.min(r, Math.abs(h));
+    if (h >= 0) return "M"+x+","+(y+r)+" Q"+x+","+y+" "+(x+r)+","+y+" H"+(x+w-r)+" Q"+(x+w)+","+y+" "+(x+w)+","+(y+r)+" V"+(y+h)+" H"+x+" Z";
+    // barra para baixo (saldo negativo): canto arredondado na ponta inferior, reto na base (zero)
+    var yb = y + h;
+    return "M"+x+","+y+" H"+(x+w)+" V"+(yb-r)+" Q"+(x+w)+","+yb+" "+(x+w-r)+","+yb+" H"+(x+r)+" Q"+x+","+yb+" "+x+","+(yb-r)+" Z";
+  }
+
+  // arredonda para um "número bonito" (1/2/5 × 10^n) e devolve o topo do eixo + o passo das 4 linhas de grade
+  function niceScale(maxVal){
+    var rawStep = Math.max(maxVal, 1) / 4;
+    var mag = Math.pow(10, Math.floor(Math.log10(rawStep)));
+    var norm = rawStep / mag;
+    var niceNorm = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+    var step = niceNorm * mag;
+    return {max: step*4, step: step};
+  }
+
+  function buildMonthlyChart(){
+    var totals = computeMonthTotals();
+    var months = finMonthly.concat([{key:"ago", label:"Ago*", entrada: totals.entrada, saida: totals.saida}]);
+    var W = 680, H = 210, padL = 44, padR = 6, padT = 26, padB = 26;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var baseline = padT + plotH;
+    var maxVal = Math.max.apply(null, months.map(function(m){ return Math.max(m.entrada, m.saida); }));
+    var scale = niceScale(maxVal), niceMax = scale.max, step = scale.step;
+    var bandW = plotW / months.length;
+    var barW = 20, gap = 5;
+    var svg = '<svg class="fin-chart-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Gráfico de entradas e saídas dos últimos 6 meses">';
+
+    for (var t = 0; t <= niceMax + 0.01; t += step){
+      var gy = baseline - (t/niceMax)*plotH;
+      svg += '<line x1="'+padL+'" y1="'+gy+'" x2="'+(padL+plotW)+'" y2="'+gy+'" stroke="var(--border)" stroke-width="1"/>';
+      svg += '<text x="'+(padL-8)+'" y="'+(gy+3)+'" text-anchor="end" font-size="10" fill="var(--text-faint)" style="font-variant-numeric:tabular-nums;">'+(t===0?"0":Math.round(t/1000)+"k")+'</text>';
+    }
+
+    months.forEach(function(m, i){
+      var bandStart = padL + i*bandW;
+      var groupW = barW*2 + gap;
+      var gStart = bandStart + (bandW-groupW)/2;
+      var eH = (m.entrada/niceMax)*plotH, eY = baseline-eH;
+      var sH = (m.saida/niceMax)*plotH, sY = baseline-sH;
+      var eX = gStart, sX = gStart+barW+gap;
+
+      svg += '<path class="fin-bar" d="'+roundedTopRectPath(eX,eY,barW,eH,4)+'" fill="#3F8F5F"/>';
+      svg += '<rect class="fin-bar-hit" tabindex="0" role="img" aria-label="Entradas em '+m.label+': '+brl(m.entrada)+'" x="'+(eX-3)+'" y="'+padT+'" width="'+(barW+6)+'" height="'+plotH+'" fill="transparent" ' +
+        'onmouseenter="window.__finHover(event,\'Entradas\',\''+m.label+'\','+m.entrada+')" onmouseleave="window.__finUnhover(event)" ' +
+        'onfocus="window.__finHover(event,\'Entradas\',\''+m.label+'\','+m.entrada+')" onblur="window.__finUnhover(event)"></rect>';
+
+      svg += '<path class="fin-bar" d="'+roundedTopRectPath(sX,sY,barW,sH,4)+'" fill="#AB4430"/>';
+      svg += '<rect class="fin-bar-hit" tabindex="0" role="img" aria-label="Saídas em '+m.label+': '+brl(m.saida)+'" x="'+(sX-3)+'" y="'+padT+'" width="'+(barW+6)+'" height="'+plotH+'" fill="transparent" ' +
+        'onmouseenter="window.__finHover(event,\'Saídas\',\''+m.label+'\','+m.saida+')" onmouseleave="window.__finUnhover(event)" ' +
+        'onfocus="window.__finHover(event,\'Saídas\',\''+m.label+'\','+m.saida+')" onblur="window.__finUnhover(event)"></rect>';
+
+      if (i === months.length - 1){
+        var topY = Math.min(eY, sY) - 30;
+        var lblX = gStart + groupW/2 - 22;
+        svg += '<circle cx="'+(lblX-8)+'" cy="'+(topY-3)+'" r="3" fill="#3F8F5F"/>';
+        svg += '<text x="'+lblX+'" y="'+topY+'" text-anchor="start" font-size="11" font-weight="700" fill="var(--text-muted)" style="font-variant-numeric:tabular-nums;">'+brlCompact(m.entrada)+'</text>';
+        svg += '<circle cx="'+(lblX-8)+'" cy="'+(topY+14)+'" r="3" fill="#AB4430"/>';
+        svg += '<text x="'+lblX+'" y="'+(topY+17)+'" text-anchor="start" font-size="11" font-weight="700" fill="var(--text-muted)" style="font-variant-numeric:tabular-nums;">'+brlCompact(m.saida)+'</text>';
+      }
+      svg += '<text x="'+(bandStart+bandW/2)+'" y="'+(baseline+18)+'" text-anchor="middle" font-size="11" fill="var(--text-muted)">'+m.label+'</text>';
+    });
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  function buildDailyChart(){
+    var days = computeDaily();
+    var W = 680, H = 210, padL = 44, padR = 6, padT = 20, padB = 24;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var midY = padT + plotH/2;
+    var maxAbs = Math.max(20, Math.max.apply(null, days.map(function(d){ return Math.abs(d.net); })));
+    var niceMax = niceScale(maxAbs).max;
+    var bandW = plotW / days.length;
+    var barW = Math.min(16, bandW - 4);
+    var svg = '<svg class="fin-chart-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Gráfico de saldo diário de agosto">';
+
+    svg += '<line x1="'+padL+'" y1="'+midY+'" x2="'+(padL+plotW)+'" y2="'+midY+'" stroke="var(--border)" stroke-width="1"/>';
+    svg += '<text x="'+(padL-8)+'" y="'+(midY+3)+'" text-anchor="end" font-size="10" fill="var(--text-faint)">0</text>';
+
+    days.forEach(function(d, i){
+      var bandStart = padL + i*bandW;
+      var x = bandStart + (bandW-barW)/2;
+      var h = (Math.abs(d.net)/niceMax) * (plotH/2);
+      var color = d.net >= 0 ? "#3F8F5F" : "#AB4430";
+      var y = d.net >= 0 ? midY - h : midY;
+      if (d.net === 0){
+        svg += '<rect x="'+x+'" y="'+(midY-1)+'" width="'+barW+'" height="2" rx="1" fill="var(--border-strong)"/>';
+      } else if (d.net > 0){
+        svg += '<path class="fin-bar" d="'+roundedTopRectPath(x, midY-h, barW, h, 3)+'" fill="'+color+'"/>';
+      } else {
+        svg += '<path class="fin-bar" d="'+roundedTopRectPath(x, midY, barW, h, 3)+'" fill="'+color+'"/>';
+      }
+      var isToday = d.day === dayOfMonth(HOJE);
+      var label = (d.day<10?"0":"")+d.day+"/08";
+      var seriesLabel = d.net === 0 ? "Sem lançamentos" : (d.net > 0 ? "Saldo positivo" : "Saldo negativo");
+      svg += '<rect class="fin-bar-hit" tabindex="0" role="img" aria-label="'+label+': '+(d.net===0?"sem lançamentos":brl(d.net))+'" x="'+(x-2)+'" y="'+padT+'" width="'+(barW+4)+'" height="'+plotH+'" fill="transparent" ' +
+        'onmouseenter="window.__finHover(event,\''+seriesLabel+'\',\''+label+'\','+d.net+')" onmouseleave="window.__finUnhover(event)" ' +
+        'onfocus="window.__finHover(event,\''+seriesLabel+'\',\''+label+'\','+d.net+')" onblur="window.__finUnhover(event)"></rect>';
+      if (d.day % 5 === 0 || isToday || d.day === 1){
+        svg += '<text x="'+(bandStart+bandW/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="9.5" fill="'+(isToday?"var(--primary-strong)":"var(--text-faint)")+'" font-weight="'+(isToday?"700":"400")+'">'+d.day+'</text>';
+      }
+    });
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  var finTooltipEl = document.getElementById("finTooltip");
+  window.__finHover = function(evt, seriesLabel, monthLabel, value){
+    var bar = evt.currentTarget.previousElementSibling;
+    if (bar) bar.style.filter = "brightness(1.12)";
+    var valueText = seriesLabel === "Sem lançamentos" ? "" : (value >= 0 ? brl(value) : "− " + brl(Math.abs(value)));
+    finTooltipEl.innerHTML = '<span class="tt-series">'+seriesLabel+' · '+monthLabel+'</span>'+valueText;
+    finTooltipEl.classList.add("show");
+    var r = evt.currentTarget.getBoundingClientRect();
+    var tw = finTooltipEl.offsetWidth || 140;
+    var left = Math.min(Math.max(8, r.left - tw/2 + r.width/2), window.innerWidth - tw - 8);
+    var top = r.top - 34;
+    finTooltipEl.style.left = left + "px";
+    finTooltipEl.style.top = Math.max(8, top) + "px";
+  };
+  window.__finUnhover = function(evt){
+    var bar = evt && evt.currentTarget ? evt.currentTarget.previousElementSibling : null;
+    if (bar) bar.style.filter = "";
+    finTooltipEl.classList.remove("show");
+  };
+
+  function renderFinRows(){
+    var rows = finTransactions.filter(function(t){ return finFilter==="todas" || t.type===finFilter; });
+    document.getElementById("finRows").innerHTML = rows.length ? rows.map(function(t){
+      var sign = t.type==="entrada" ? "+ " : "− ";
+      return '<tr>' +
+        '<td class="mono">'+brDate(t.date)+'</td>' +
+        '<td>'+escapeHtml(t.desc)+'</td>' +
+        '<td><span class="tag">'+escapeHtml(t.cat)+'</span></td>' +
+        '<td><span class="type-pill type-pill-'+t.type+'">'+(t.type==="entrada"?"Entrada":"Saída")+'</span></td>' +
+        '<td class="mono amount-'+t.type+'" style="text-align:right;">'+sign+brl(t.value)+'</td>' +
+      '</tr>';
+    }).join("") : '<tr><td colspan="5" class="empty">Nenhuma transação neste filtro.</td></tr>';
+  }
+
+  function renderConvenios(){
+    var pend = convenioPendentes();
+    document.getElementById("convenioRows").innerHTML = pend.length ? pend.map(function(x){
+      return '<tr>' +
+        '<td>'+escapeHtml(x.patient.name)+'</td>' +
+        '<td><span class="tag">'+escapeHtml(x.patient.plan)+'</span></td>' +
+        '<td>'+escapeHtml(x.appt.type)+'</td>' +
+        '<td class="mono" style="text-align:right;">'+brl(x.valor)+'</td>' +
+        '<td style="text-align:right;"><button class="btn btn-sm" onclick="window.__marcarRecebido('+x.appt.id+')">Marcar como recebido</button></td>' +
+      '</tr>';
+    }).join("") : '<tr><td colspan="5" class="empty">Nenhum valor pendente de convênio no momento — tudo em dia.</td></tr>';
+  }
+
+  window.__marcarRecebido = function(apptId){
+    var a = apptById(apptId);
+    if (!a) return;
+    var p = patientById(a.patientId);
+    var valor = convenioValor(p.plan, a.type);
+    if (valor === null) return;
+    a.billed = true;
+    finTransactions.unshift({date: HOJE, desc: "Repasse convênio — "+p.name, cat: "Convênio", type: "entrada", value: valor});
+    renderFinanceiro();
+    showToast("Repasse de "+p.plan+" registrado: +"+brl(valor));
+  };
+
+  /* ---------------- tabela de convênios (Configurações) ---------------- */
+  var CV_TIPOS = ["Primeira consulta", "Consulta", "Retorno"];
+  function renderConvenioTable(){
+    var keys = Object.keys(convenioTabela);
+    document.getElementById("convenioTableRows").innerHTML = keys.length ? keys.map(function(nome){
+      var t = convenioTabela[nome];
+      return '<tr>' +
+        '<td><b>'+escapeHtml(nome)+'</b></td>' +
+        CV_TIPOS.map(function(tipo){
+          return '<td style="text-align:right;"><input type="number" class="cv-input" min="0" step="1" value="'+t[tipo]+'" data-conv="'+escapeHtml(nome)+'" data-tipo="'+tipo+'"></td>';
+        }).join("") +
+        '<td style="text-align:right;"><button class="icon-btn" title="Remover convênio" onclick="window.__removeConvenio(\''+escapeHtml(nome).replace(/'/g,"\\'")+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-8 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></button></td>' +
+      '</tr>';
+    }).join("") : '<tr><td colspan="4" class="empty">Nenhum convênio cadastrado.</td></tr>';
+
+    document.querySelectorAll(".cv-input").forEach(function(inp){
+      inp.addEventListener("change", function(){
+        var v = parseFloat(inp.value) || 0;
+        convenioTabela[inp.dataset.conv][inp.dataset.tipo] = v;
+        inp.value = v;
+        renderFinStats();
+        renderConvenios();
+        showToast("Tabela de "+inp.dataset.conv+" atualizada");
+      });
+    });
+  }
+
+  window.__removeConvenio = function(nome){
+    delete convenioTabela[nome];
+    renderConvenioTable();
+    renderFinStats();
+    renderConvenios();
+  };
+
+  document.getElementById("cvAddBtn").addEventListener("click", function(){
+    var nome = document.getElementById("cvNewName").value.trim();
+    if (!nome){ showToast("Informe o nome do convênio"); return; }
+    if (convenioTabela[nome]){ showToast("Esse convênio já está cadastrado"); return; }
+    convenioTabela[nome] = {
+      "Primeira consulta": parseFloat(document.getElementById("cvNewPrimeira").value) || 0,
+      "Consulta": parseFloat(document.getElementById("cvNewConsulta").value) || 0,
+      "Retorno": parseFloat(document.getElementById("cvNewRetorno").value) || 0
+    };
+    ["cvNewName","cvNewPrimeira","cvNewConsulta","cvNewRetorno"].forEach(function(id){ document.getElementById(id).value = ""; });
+    renderConvenioTable();
+    renderFinStats();
+    renderConvenios();
+    showToast("Convênio "+nome+" adicionado");
+  });
+
+  var finChartMode = "diario";
+  var finLegends = {
+    diario: [
+      {color:"#3F8F5F", label:"Dia com saldo positivo"},
+      {color:"#AB4430", label:"Dia com saldo negativo"}
+    ],
+    mensal: [
+      {color:"#3F8F5F", label:"Entradas"},
+      {color:"#AB4430", label:"Saídas"}
+    ]
+  };
+
+  function renderFinChart(){
+    document.getElementById("finChart").innerHTML = finChartMode === "diario" ? buildDailyChart() : buildMonthlyChart();
+    document.getElementById("finChartTitle").textContent = finChartMode === "diario" ? "Dia a dia de agosto" : "Entradas × Saídas — últimos 6 meses";
+    document.getElementById("finChartSub").textContent = finChartMode === "diario"
+      ? "Atualizado até 25/08 — cada lançamento novo entra na hora"
+      : "Agosto ainda em andamento (dados até 25/08)";
+    document.getElementById("finLegend").innerHTML = finLegends[finChartMode].map(function(l){
+      return '<span class="fin-legend-item"><span class="fin-legend-dot" style="background:'+l.color+';"></span>'+l.label+'</span>';
+    }).join("");
+  }
+
+  document.querySelectorAll("#finChartModeSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#finChartModeSeg button").forEach(function(o){ o.classList.remove("active"); });
+      b.classList.add("active");
+      finChartMode = b.dataset.mode;
+      renderFinChart();
+    });
+  });
+
+  function renderFinanceiro(){
+    renderFinStats();
+    renderConvenios();
+    renderFinChart();
+    renderFinRows();
+  }
+
+  document.querySelectorAll("#finFilterSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#finFilterSeg button").forEach(function(o){ o.classList.remove("active"); });
+      b.classList.add("active");
+      finFilter = b.dataset.filter;
+      renderFinRows();
+    });
+  });
+
+  function fillTxCategorias(){
+    document.getElementById("txCategoria").innerHTML = finCategorias[txTxType()].map(function(c){ return '<option>'+c+'</option>'; }).join("");
+  }
+  function txTxType(){ return document.querySelector("#txTypeSeg button.active").dataset.type; }
+
+  document.querySelectorAll("#txTypeSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#txTypeSeg button").forEach(function(o){ o.classList.remove("active"); });
+      b.classList.add("active");
+      fillTxCategorias();
+    });
+  });
+
+  document.getElementById("btnNovaTransacao").addEventListener("click", function(){
+    document.querySelectorAll("#txTypeSeg button").forEach(function(o){ o.classList.toggle("active", o.dataset.type==="entrada"); });
+    fillTxCategorias();
+    document.getElementById("txValor").value = "";
+    document.getElementById("txDescricao").value = "";
+    document.getElementById("txData").value = HOJE;
+    openModal("modalTransacao");
+  });
+
+  document.getElementById("txSave").addEventListener("click", function(){
+    var valor = parseFloat(document.getElementById("txValor").value);
+    var desc = document.getElementById("txDescricao").value.trim();
+    if (!valor || valor <= 0){ showToast("Informe um valor válido"); return; }
+    if (!desc){ showToast("Informe uma descrição"); return; }
+    var type = txTxType();
+    var tx = {
+      id: Date.now(),
+      date: document.getElementById("txData").value || HOJE,
+      desc: desc,
+      cat: document.getElementById("txCategoria").value,
+      type: type,
+      value: valor
+    };
+    // finTransactions é a única fonte de dados: basta adicionar aqui que os
+    // totais do mês e o gráfico dia a dia recalculam tudo sozinhos.
+    finTransactions.unshift(tx);
+    closeModals();
+    renderFinanceiro();
+    showToast("Transação registrada");
+  });
+
+  /* ---------------- notas fiscais (NFS-e, rascunho) ---------------- */
+  var finInvoices = [];
+  var nfServicos = {
+    "4.01": "Medicina e biomedicina",
+    "4.02": "Análises clínicas e laboratoriais",
+    "4.22": "Planos de saúde e convênios médicos"
+  };
+
+  document.querySelectorAll("#finPanelSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#finPanelSeg button").forEach(function(o){ o.classList.remove("active"); });
+      b.classList.add("active");
+      document.getElementById("finPanelOverview").classList.toggle("active", b.dataset.panel === "overview");
+      document.getElementById("finPanelNotas").classList.toggle("active", b.dataset.panel === "notas");
+      if (b.dataset.panel === "notas") renderNotaPreview();
+    });
+  });
+
+  function fillNfPatientSelect(){
+    document.getElementById("nfPatient").innerHTML =
+      '<option value="">Tomador avulso (sem paciente vinculado)</option>' +
+      patients.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join("");
+  }
+
+  function readNfForm(){
+    var patientSel = document.getElementById("nfPatient");
+    return {
+      patientId: patientSel.value || null,
+      patientName: patientSel.value ? patientById(parseInt(patientSel.value,10)).name : "",
+      cpf: document.getElementById("nfCpf").value.trim(),
+      date: document.getElementById("nfData").value || HOJE,
+      desc: document.getElementById("nfDescricao").value.trim() || "Consulta médica",
+      codigo: document.getElementById("nfCodigo").value,
+      valor: parseFloat(document.getElementById("nfValor").value) || 0,
+      aliquota: parseFloat(document.getElementById("nfAliquota").value) || 0,
+      obs: document.getElementById("nfObs").value.trim()
+    };
+  }
+
+  function buildInvoicePreview(d){
+    var tomador = d.patientName || "(tomador não informado)";
+    var iss = d.valor * (d.aliquota/100);
+    return '<div class="nfe-preview">' +
+      '<div class="nfe-watermark">RASCUNHO</div>' +
+      '<div class="nfe-head">' +
+        '<div><h3>NFS-e — Nota Fiscal de Serviço eletrônica</h3><div class="nfe-sub">Clínica Vitalis · CNPJ 00.000.000/0000-00 (a preencher)</div></div>' +
+        '<span class="nfe-tag">Rascunho · sem valor fiscal</span>' +
+      '</div>' +
+      '<div class="nfe-body">' +
+        '<div class="nfe-block-title">Tomador do serviço</div>' +
+        '<div class="nfe-row"><span class="k">Nome</span><span class="v">'+escapeHtml(tomador)+'</span></div>' +
+        '<div class="nfe-row"><span class="k">CPF</span><span class="v">'+(escapeHtml(d.cpf)||"—")+'</span></div>' +
+        '<div class="nfe-block-title">Serviço prestado</div>' +
+        '<div class="nfe-row"><span class="k">Descrição</span><span class="v">'+escapeHtml(d.desc)+'</span></div>' +
+        '<div class="nfe-row"><span class="k">Código (LC 116)</span><span class="v">'+d.codigo+' — '+nfServicos[d.codigo]+'</span></div>' +
+        '<div class="nfe-row"><span class="k">Data da prestação</span><span class="v">'+brDate(d.date)+'/'+d.date.slice(0,4)+'</span></div>' +
+        '<div class="nfe-block-title">Valores</div>' +
+        '<div class="nfe-row"><span class="k">Valor do serviço</span><span class="v">'+brl(d.valor)+'</span></div>' +
+        '<div class="nfe-row"><span class="k">ISS ('+d.aliquota+'%, informativo)</span><span class="v">'+brl(iss)+'</span></div>' +
+        (d.obs ? '<div class="nfe-row"><span class="k">Observações</span><span class="v">'+escapeHtml(d.obs)+'</span></div>' : '') +
+      '</div>' +
+      '<div class="nfe-total"><span class="k">Valor total do serviço</span><span class="v">'+brl(d.valor)+'</span></div>' +
+      '<div class="nfe-foot">Rascunho gerado no Vitalis — sem numeração, chave de acesso ou validade fiscal. A emissão oficial depende de integração com a prefeitura ou um provedor de NFS-e.</div>' +
+    '</div>';
+  }
+
+  function renderNotaPreview(){
+    document.getElementById("nfPreview").innerHTML = buildInvoicePreview(readNfForm());
+  }
+
+  ["nfPatient","nfCpf","nfData","nfDescricao","nfCodigo","nfValor","nfAliquota","nfObs"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", renderNotaPreview);
+    document.getElementById(id).addEventListener("change", renderNotaPreview);
+  });
+
+  function renderNfRows(){
+    document.getElementById("nfRows").innerHTML = finInvoices.length ? finInvoices.map(function(inv, idx){
+      return '<tr>' +
+        '<td class="mono">'+brDate(inv.date)+'</td>' +
+        '<td>'+escapeHtml(inv.patientName || "Tomador avulso")+'</td>' +
+        '<td>'+escapeHtml(inv.desc)+'</td>' +
+        '<td class="mono" style="text-align:right;">'+brl(inv.valor)+'</td>' +
+        '<td><span class="draft-pill">Rascunho</span></td>' +
+        '<td style="text-align:right;">' +
+          '<button class="icon-btn" title="Reabrir" onclick="window.__loadNfDraft('+idx+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/></svg></button>' +
+          '<button class="icon-btn" title="Remover" onclick="window.__removeNfDraft('+idx+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-8 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></button>' +
+        '</td>' +
+      '</tr>';
+    }).join("") : '<tr><td colspan="6" class="empty">Nenhum rascunho salvo ainda.</td></tr>';
+  }
+
+  window.__loadNfDraft = function(idx){
+    var inv = finInvoices[idx];
+    if (!inv) return;
+    document.getElementById("nfPatient").value = inv.patientId || "";
+    document.getElementById("nfCpf").value = inv.cpf;
+    document.getElementById("nfData").value = inv.date;
+    document.getElementById("nfDescricao").value = inv.desc;
+    document.getElementById("nfCodigo").value = inv.codigo;
+    document.getElementById("nfValor").value = inv.valor;
+    document.getElementById("nfAliquota").value = inv.aliquota;
+    document.getElementById("nfObs").value = inv.obs;
+    renderNotaPreview();
+    showToast("Rascunho carregado no formulário");
+  };
+  window.__removeNfDraft = function(idx){
+    finInvoices.splice(idx, 1);
+    renderNfRows();
+    showToast("Rascunho removido");
+  };
+
+  document.getElementById("nfSaveDraft").addEventListener("click", function(){
+    var d = readNfForm();
+    if (d.valor <= 0){ showToast("Informe o valor do serviço"); return; }
+    finInvoices.unshift({
+      id: Date.now(), patientId: d.patientId, patientName: d.patientName, cpf: d.cpf,
+      date: d.date, desc: d.desc, codigo: d.codigo, valor: d.valor, aliquota: d.aliquota, obs: d.obs
+    });
+    renderNfRows();
+    showToast("Rascunho de NFS-e salvo");
+  });
+
+  /* ---------------- chat drawer (from Visão do dia / Pacientes) ---------------- */
+  var scrim = document.getElementById("scrim");
+  var chatDrawer = document.getElementById("chatDrawer");
+  var patientDrawer = document.getElementById("patientDrawer");
+
+  function openDrawer(el){ scrim.classList.add("show"); el.classList.add("show"); }
+  function closeDrawers(){ scrim.classList.remove("show"); chatDrawer.classList.remove("show"); patientDrawer.classList.remove("show"); }
+  scrim.addEventListener("click", closeDrawers);
+  document.getElementById("closeChatDrawer").addEventListener("click", closeDrawers);
+  document.getElementById("closePatientDrawer").addEventListener("click", closeDrawers);
+
+  window.__openChat = function(patientId){
+    var p = patientById(patientId);
+    var c = convFor(patientId);
+    if (!c){ c = {patientId:patientId, unread:0, messages:[]}; conversations.push(c); }
+    c.unread = 0;
+    document.getElementById("chatAvatar").textContent = initials(p.name);
+    document.getElementById("chatName").textContent = p.name;
+    document.getElementById("chatPhone").textContent = p.phone;
+    fillThread("chatThread", c);
+    openDrawer(chatDrawer);
+    updateWaBadge();
+    document.getElementById("chatSend").onclick = function(){ sendFrom("chatInput", c, function(){ renderWaList(); updateWaBadge(); }); };
+  };
+
+  window.__openPatient = function(patientId){
+    var p = patientById(patientId);
+    document.getElementById("pdAvatar").textContent = initials(p.name);
+    document.getElementById("pdName").textContent = p.name;
+    document.getElementById("pdMeta").textContent = p.phone + " · " + p.plan;
+    document.getElementById("pdHistory").innerHTML = p.history.length ? p.history.map(function(h){
+      return '<div class="history-item"><div class="history-dot"></div><div><div style="font-size:12.5px; font-weight:600;" class="mono">'+h.date+'</div><div style="font-size:13px; color:var(--text-muted);">'+h.note+'</div></div></div>';
+    }).join("") : '<div class="empty">Sem consultas anteriores registradas.</div>';
+    document.getElementById("pdMsgBtn").onclick = function(){ window.__openChat(p.id); };
+    document.getElementById("pdAgendarBtn").onclick = function(){ closeDrawers(); openModal("modalConsulta"); document.getElementById("mcPatient").value = p.id; };
+    document.getElementById("pdRxBtn").onclick = function(){ closeDrawers(); window.__openPrescricao(p.id); };
+    openDrawer(patientDrawer);
+  };
+
+  /* ---------------- receitar (Memed, simulado) ---------------- */
+  var rxPatientId = null;
+  var rxItems = [];
+
+  function renderRxItems(){
+    document.getElementById("rxItems").innerHTML = rxItems.length ? rxItems.map(function(text, idx){
+      return '<div class="rx-item"><span>'+escapeHtml(text)+'</span><button class="rx-item-remove" title="Remover" onclick="window.__removeRxItem('+idx+')">×</button></div>';
+    }).join("") : '<div class="rx-empty">Nenhum item adicionado ainda.</div>';
+  }
+
+  window.__openPrescricao = function(patientId){
+    var p = patientById(patientId);
+    rxPatientId = patientId;
+    rxItems = [];
+    document.getElementById("rxPatientName").value = p.name;
+    document.getElementById("rxItemInput").value = "";
+    document.getElementById("rxNotes").value = "";
+    renderRxItems();
+    openModal("modalPrescricao");
+  };
+
+  window.__removeRxItem = function(idx){ rxItems.splice(idx, 1); renderRxItems(); };
+
+  document.getElementById("rxAddItem").addEventListener("click", function(){
+    var input = document.getElementById("rxItemInput");
+    var text = input.value.trim();
+    if (!text) return;
+    rxItems.push(text);
+    input.value = "";
+    renderRxItems();
+    input.focus();
+  });
+  document.getElementById("rxItemInput").addEventListener("keydown", function(e){
+    if (e.key === "Enter"){ e.preventDefault(); document.getElementById("rxAddItem").click(); }
+  });
+
+  document.getElementById("rxSave").addEventListener("click", function(){
+    if (!rxItems.length){ showToast("Adicione ao menos um item à receita"); return; }
+    var p = patientById(rxPatientId);
+    closeModals();
+    var c = convFor(rxPatientId);
+    if (!c){ c = {patientId:rxPatientId, unread:0, messages:[]}; conversations.push(c); }
+    c.messages.push({from:"out", text:"Sua receita já está pronta e assinada digitalmente. Você pode retirar na farmácia ou comprar online com este número.", time:"agora"});
+    renderWaList();
+    updateWaBadge();
+    showToast("Receita emitida e assinada via Memed (simulação) — " + p.name + " foi avisado(a) por WhatsApp.");
+  });
+
+  /* ---------------- status menu ---------------- */
+  var statusMenuEl = document.getElementById("statusMenu");
+
+  function closeStatusMenu(){ statusMenuEl.classList.remove("show"); }
+
+  window.__openStatusMenu = function(apptId, evt){
+    evt.stopPropagation();
+    var appt = apptById(apptId);
+    if (!appt) return;
+    statusMenuEl.innerHTML = STATUS_OPTIONS.map(function(o){
+      return '<button class="status-menu-item'+(o.key===appt.status?" active":"")+'" onclick="window.__setStatus('+apptId+',\''+o.key+'\')">' +
+        '<span class="dot" style="background:var(--'+o.varName+');"></span>' + o.label +
+        (o.key===appt.status ? '<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : '') +
+      '</button>';
+    }).join("");
+    var anchor = evt.currentTarget.getBoundingClientRect();
+    statusMenuEl.style.left = "-9999px";
+    statusMenuEl.classList.add("show");
+    var menuW = statusMenuEl.offsetWidth || 188;
+    var menuH = statusMenuEl.offsetHeight || 180;
+    var left = Math.min(anchor.left, window.innerWidth - menuW - 12);
+    var top = anchor.bottom + 6;
+    if (top + menuH > window.innerHeight) top = anchor.top - 6 - menuH;
+    statusMenuEl.style.left = Math.max(8, left) + "px";
+    statusMenuEl.style.top = Math.max(8, top) + "px";
+  };
+
+  window.__setStatus = function(apptId, newStatus){
+    var appt = apptById(apptId);
+    if (!appt) return;
+    appt.status = newStatus;
+    closeStatusMenu();
+    renderDia();
+    renderWeek();
+    showToast("Status atualizado para “" + statusLabel[newStatus] + "”");
+  };
+
+  document.addEventListener("click", function(e){
+    if (statusMenuEl.classList.contains("show") && !statusMenuEl.contains(e.target)) closeStatusMenu();
+  });
+  document.addEventListener("scroll", function(){ closeStatusMenu(); }, true);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeStatusMenu(); });
+
+  /* ---------------- modals ---------------- */
+  function openModal(id){ document.getElementById(id).classList.add("show"); }
+  function closeModals(){ document.querySelectorAll(".modal").forEach(function(m){ m.classList.remove("show"); }); }
+  document.querySelectorAll("[data-close-modal]").forEach(function(b){ b.addEventListener("click", closeModals); });
+  document.querySelectorAll(".modal").forEach(function(m){ m.addEventListener("click", function(e){ if(e.target===m) closeModals(); }); });
+
+  document.getElementById("btnNovaConsulta").addEventListener("click", function(){
+    document.getElementById("mcPatient").innerHTML = patients.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join("");
+    openModal("modalConsulta");
+  });
+  document.getElementById("mcSave").addEventListener("click", function(){
+    closeModals();
+    showToast("Consulta agendada com sucesso");
+  });
+  document.getElementById("btnNovoPaciente").addEventListener("click", function(){ openModal("modalPaciente"); });
+  document.getElementById("npSave").addEventListener("click", function(){
+    var name = document.getElementById("npName").value.trim();
+    if (!name){ showToast("Informe o nome do paciente"); return; }
+    var id = patients.length + 1;
+    patients.push({id:id, name:name, phone:document.getElementById("npPhone").value || "—", plan:document.getElementById("npPlan").value || "Particular", last:"—", next:"—", history:[]});
+    closeModals();
+    renderPatients(document.getElementById("patientSearch").value);
+    showToast("Paciente cadastrado");
+  });
+
+  /* ---------------- toast ---------------- */
+  var toastTimer;
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+  }
+
+  /* ---------------- search wiring ---------------- */
+  document.getElementById("patientSearch").addEventListener("input", function(e){ renderPatients(e.target.value); });
+  document.getElementById("globalSearch").addEventListener("keydown", function(e){
+    if (e.key==="Enter"){
+      showView("pacientes");
+      document.getElementById("patientSearch").value = e.target.value;
+      renderPatients(e.target.value);
+    }
+  });
+
+  document.getElementById("weekPrev").addEventListener("click", function(){ showToast("Semana anterior (protótipo)"); });
+  document.getElementById("weekNext").addEventListener("click", function(){ showToast("Próxima semana (protótipo)"); });
+  document.getElementById("agendaDiaBtn").addEventListener("click", function(){ showToast("Visualização por dia (protótipo)"); });
+
+  /* ---------------- init ---------------- */
+  renderDia();
+  renderWeek();
+  renderPatients("");
+  renderWaList();
+  updateWaBadge();
+  renderWaMain(null);
+  renderConvenioTable();
+  renderFinanceiro();
+  fillNfPatientSelect();
+  renderNfRows();
+  renderNotaPreview();
+})();
+</script>
